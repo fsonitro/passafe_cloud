@@ -1,0 +1,44 @@
+:root {
+    /* Light theme defaults */
+    --card-background: #ffffff;
+    --muted-link-color: #6c757d;
+    --text-color: #000000; /* Light theme text color */
+    --background-color: #f8f9fa; /* Light theme background color */
+}
+
+[data-theme="dark"] {
+    /* Dark theme overrides */
+    --card-background: #1e1e1e;
+    --muted-link-color: #b3b3b3;
+    --text-color: #e0e0e0; /* Improved dark theme text color */
+    --background-color: #121212; /* Dark theme background color */
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.form-card {
+    background-color: var(--card-background);
+    color: var(--text-color);
+    border-radius: 6px;
+    padding: 1.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-card .form-control {
+    background-color: var(--card-background);
+    color: var(--text-color);
+    border: 1px solid #ccc; /* Optionally override with a variable */
+}
+
+.muted-link {
+    color: var(--muted-link-color);
+    text-decoration: none;
+}
+
+.muted-link:hover {
+    color: var(--text-color);
+}

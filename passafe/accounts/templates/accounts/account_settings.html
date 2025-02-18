@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Account Settings - PasSafe{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">
+        <i class="fas fa-user-cog"></i> Account Settings
+    </h2>
+
+    <!-- Message Section -->
+    {% if messages %}
+    <div class="mb-3">
+        {% for message in messages %}
+            {% if "account_settings" in message.tags %}
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Account Details Section -->
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="box shadow-sm p-4">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <!-- Profile Picture -->
+                    <div class="text-center mb-3">
+                        {% if user.profile_picture %}
+                            <img src="{{ user.profile_picture.url }}" alt="Profile Picture" class="rounded-circle" width="150" height="150" id="profile-picture-preview">
+                        {% else %}
+                            <img src="{% static 'images/user_avatar.png' %}" alt="Default Profile Picture" class="rounded-circle" width="150" height="150" id="profile-picture-preview">
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_profile_picture" class="form-label"><i class="fas fa-camera"></i> Profile Picture</label>
+                        <input type="file" class="form-control" id="id_profile_picture" name="profile_picture" onchange="previewProfilePicture(event)">
+                    </div>
+
+                    <!-- Email (Read-only) -->
+                    <div class="mb-3">
+                        <label for="id_email" class="form-label"><i class="fas fa-envelope"></i> Email</label>
+                        <p class="form-control-plaintext">{{ email }}</p>
+                    </div>
+
+                    <!-- Editable Name Fields -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="id_name" class="form-label"><i class="fas fa-user"></i> First Name</label>
+                            <input type="text" class="form-control" id="id_name" name="name" value="{{ form.name.value }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="id_surname" class="form-label"><i class="fas fa-user"></i> Last Name</label>
+                            <input type="text" class="form-control" id="id_surname" name="surname" value="{{ form.surname.value }}">
+                        </div>
+                    </div>
+
+                    <!-- Save Changes Button -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary px-4">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <hr class="mt-5">
+
+    <!-- Multi-Factor Authentication Section -->
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h3 class="text-center mb-3">
+                <i class="fas fa-shield-alt"></i> Multi-Factor Authentication (MFA)
+            </h3>
+            {% if user.mfa_enabled %}
+                <p class="text-center">MFA is currently <strong>enabled</strong> on your account.</p>
+                <div class="text-center">
+                    <a href="{% url 'accounts:disable_mfa' %}" class="btn btn-danger">
+                        <i class="fas fa-lock-open"></i> Disable MFA
+                    </a>
+                </div>
+            {% else %}
+                <p class="text-center">MFA is currently <strong>not enabled</strong> on your account.</p>
+                <div class="text-center">
+                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#enableMFAModal">
+                        <i class="fas fa-lock"></i> Enable MFA
+                    </button>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- MFA Modal -->
+    <div class="modal fade" id="enableMFAModal" tabindex="-1" aria-labelledby="enableMFAModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="enableMFAModalLabel">
+                        <i class="fas fa-lock"></i> Enable Multi-Factor Authentication
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Scan the QR code below with your authenticator app:</p>
+                    <div class="text-center mb-4">
+                        <img src="data:image/png;base64,{{ qr_image }}" alt="MFA QR Code" class="qr-code-image">
+                    </div>
+                    <form method="post" action="{% url 'accounts:enable_mfa' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_mfa_code" class="form-label"><i class="fas fa-key"></i> Enter the MFA Code</label>
+                            <input type="text" class="form-control" id="id_mfa_code" name="mfa_code" required>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-shield-alt"></i> Enable MFA
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="mt-5">
+
+    <!-- Export Passwords Section -->
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h3 class="text-center mb-3">
+                <i class="fas fa-file-export"></i> Export Passwords
+            </h3>
+            <p class="text-center">You can export all your password entries to a CSV file.</p>
+            <div class="text-center">
+                <a href="{% url 'accounts:export_passwords' %}" class="btn btn-success">
+                    <i class="fas fa-download"></i> Export Passwords
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <hr class="mt-5">
+
+    <!-- Password Reset Section -->
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h3 class="text-center mb-3">
+                <i class="fas fa-redo-alt"></i> Password Reset
+            </h3>
+            <p class="text-center">If you want to reset your password, you can request a password reset.</p>
+            <div class="text-center">
+                <a href="{% url 'accounts:forgot_password_request' %}" class="btn btn-warning">
+                    <i class="fas fa-envelope-open-text"></i> Request Password Reset
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <hr class="mt-5">
+
+    <!-- Account Activity Section -->
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h3 class="text-center mb-3">
+                <i class="fas fa-list-alt"></i> Account Activity
+            </h3>
+            <p class="text-center">View the recent activities on your account.</p>
+            <div class="text-center">
+                <a href="{% url 'accounts:account_activities' %}" class="btn btn-primary">
+                    <i class="fas fa-list-alt"></i> View Account Activity
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Home Link -->
+    <div class="text-center mt-4">
+        <a href="{% url 'homepage' %}" class="btn btn-outline-secondary btn-lg">
+            <i class="fas fa-home"></i> Back to Home
+        </a>
+    </div>
+
+    <script src="{% static 'accounts/js/export_passwords.js' %}"></script>
+
+</div>
+{% endblock %}

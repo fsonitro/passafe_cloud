@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Verify Reset Code - PasSafe{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Verify Your Reset Code</h2>
+
+    <!-- Display Messages -->
+    {% if messages %}
+        <div class="alert alert-info">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Verify Reset Code Form -->
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="post" class="border p-4 bg-light rounded shadow">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="id_reset_token" class="form-label">Reset Code:</label>
+                    <input type="text" name="reset_token" id="id_reset_token" class="form-control">
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-block">Verify Code</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

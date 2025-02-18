@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Verify MFA - PasSafe{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Verify MFA</h2>
+
+    <!-- Message Section -->
+    {% if messages %}
+        <div class="mb-3">
+            {% for message in messages %}
+                {% if "verify_mfa" in message.tags %}
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- MFA Verification Form -->
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="post" class="border p-4 bg-light rounded shadow">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="mfa_code" class="form-label">Enter the code from your authenticator app:</label>
+                    <input type="text" name="mfa_code" id="mfa_code" class="form-control" required>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-block">Verify</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

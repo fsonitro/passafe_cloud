@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Account Activities - PasSafe{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Account Activity</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="table-primary">
+                <tr>
+                    <th>Timestamp</th>
+                    <th>IP Address</th>
+                    <th>User Agent</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for activity in activities %}
+                <tr>
+                    <td>{{ activity.timestamp|date:"Y-m-d H:i" }}</td>
+                    <td>{{ activity.ip_address }}</td>
+                    <td>{{ activity.user_agent }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center">No recent activity found.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Back to Account Settings Link -->
+    <div class="text-center mt-4">
+        <a href="{% url 'accounts:account_settings' %}" class="btn btn-outline-secondary btn-lg">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
+    </div>
+</div>
+{% endblock %}

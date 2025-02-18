@@ -1,0 +1,125 @@
+/* Styles for the Search Feature */
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px; /* Add space below the search bar */
+}
+
+/* Search Bar Styles */
+#search-bar {
+    border: 2px solid #007bff;
+    border-radius: 30px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    width: 50%; /* Adjust width as needed */
+    max-width: 600px; /* Prevent the bar from becoming too wide */
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+#search-bar:focus {
+    outline: none;
+    border-color: #0056b3;
+    box-shadow: 0 0 10px rgba(0, 91, 187, 0.5);
+}
+
+
+/* Highlighting Matching Results */
+table tbody tr.highlight,
+.accordion-item.highlight {
+    background-color: #e8f5e9; /* Light green for matches */
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Folder Styling */
+.accordion-button {
+    font-size: 1.1rem;
+    color: #333;
+    background-color: #f8f9fa;
+    border: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.accordion-button:hover {
+    background-color: #e2e6ea;
+}
+
+.accordion-item {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.accordion-item.highlight .accordion-button {
+    background-color: #d1e7dd;
+    font-weight: bold;
+}
+
+/* Folder Icon */
+.folder-icon {
+    color: #007bff;
+    font-size: 1.2rem;
+    margin-right: 10px;
+}
+
+/* Actions Buttons */
+.dropdown-menu .dropdown-item {
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Table Styling */
+table.table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    margin-top: 10px;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+table.table thead th {
+    background-color: #007bff;
+    color: #fff;
+    text-align: left;
+    padding: 10px;
+    font-weight: bold;
+}
+
+table.table tbody tr {
+    border-bottom: 1px solid #dee2e6;
+    transition: background-color 0.2s ease-in-out;
+}
+
+table.table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* No Results Styling */
+table.table tbody tr.no-results {
+    text-align: center;
+    color: #6c757d;
+    font-style: italic;
+    background-color: #f8f9fa;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    #search-bar {
+        width: 90%;
+    }
+
+    .folder-icon {
+        font-size: 1rem;
+    }
+
+    .accordion-button {
+        font-size: 1rem;
+    }
+}

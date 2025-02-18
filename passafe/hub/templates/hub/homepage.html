@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}PasSafe{% endblock %}
+
+{% block content %}
+
+{% load static %}
+<div class="container mt-5">
+    <!-- Welcome Message -->
+    <div class="welcome-section text-center py-4">
+        <div class="mb-3">
+            {% if user.profile_picture %}
+                <img src="{{ user.profile_picture.url }}" alt="Profile Picture" class="rounded-circle" width="100" height="100">
+            {% else %}
+                <img src="{% static 'images/user_avatar.png' %}" alt="Default Profile Picture" class="rounded-circle" width="100" height="100">
+            {% endif %}
+        </div>
+        <h1 class="mb-3">Welcome back, {{ user.name }}!</h1>
+        <p class="lead">💡 Security Tip: <strong>{{ security_tip }}</strong></p>
+    </div>
+
+    <!-- Quick Actions Section -->
+    <div class="quick-actions mt-5 py-4 box shadow-sm">
+        <h3 class="mb-4 text-center">Quick Actions</h3>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="{% url 'password_vault:create_entry_no_folder' %}" class="btn btn-primary px-4">
+                <i class="fas fa-plus"></i> Add New Password
+            </a>
+            <a href="{% url 'password_vault:vault_dashboard' %}" class="btn btn-success px-4">
+                <i class="fas fa-th-list"></i> View Vault
+            </a>
+        </div>
+    </div>
+
+    <!-- Password Vault Overview Section -->
+    <div class="vault-overview mt-5 py-4 box shadow-sm">
+        <h3 class="mb-4 text-center">Password Vault Overview</h3>
+
+        <!-- Total Entries -->
+        <div class="mb-3">
+            <p class="text-center"><strong>Total Password Entries:</strong> {{ total_entries }}</p>
+        </div>
+
+        <!-- Folders Overview -->
+        <div class="folders-overview">
+            <h5>📁 Folders</h5>
+            <ul class="list-group">
+                {% for folder in folder_data %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ folder.name }}
+                        <span class="badge bg-primary">{{ folder.entry_count }} entries</span>
+                    </li>
+                {% empty %}
+                    <p class="text-muted">No folders created yet.</p>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="recent-activity mt-4">
+            <h5>🕒 Recent Activity</h5>
+            <ul class="list-group">
+                {% for entry in recent_entries %}
+                    <li class="list-group-item">
+                        <strong>{{ entry.title|default:"Untitled" }}</strong> - {{ entry.username }} 
+                        <span class="text-muted">(Last updated: {{ entry.modified_at|date:"M d, Y H:i" }})</span>
+                    </li>
+                {% empty %}
+                    <p class="text-muted">No recent activity to display.</p>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Security Status Section -->
+    <div class="security-status mt-5 py-4 box shadow-sm">
+        <h3 class="mb-4 text-center">Security Status</h3>
+
+        <div class="row">
+            <!-- Weak Passwords -->
+            <div class="col-md-4 text-center">
+                <h5>Weak Passwords</h5>
+                <p class="display-6 text-danger">{{ weak_count }}</p>
+            </div>
+
+            <!-- Reused Passwords -->
+            <div class="col-md-4 text-center">
+                <h5>Reused Passwords</h5>
+                <p class="display-6 text-warning">{{ reused_count }}</p>
+            </div>
+
+            <!-- Password Strength Distribution -->
+            <div class="col-md-4 text-center">
+                <h5>Password Strength</h5>
+                <ul class="list-unstyled">
+                    <li><span class="text-success">Strong:</span> {{ strength_distribution.strong|default:0 }}</li>
+                    <li><span class="text-warning">Moderate:</span> {{ strength_distribution.moderate|default:0 }}</li>
+                    <li><span class="text-danger">Weak:</span> {{ strength_distribution.weak|default:0 }}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Suggestions -->
+        <div class="mt-4">
+            <h5>Suggestions</h5>
+            <ul>
+                {% for suggestion in suggestions %}
+                    <li>{{ suggestion }}</li>
+                {% empty %}
+                    <p class="text-muted">Your vault is secure!</p>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

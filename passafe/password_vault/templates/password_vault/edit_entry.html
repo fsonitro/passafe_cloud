@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Password Entry - PasSafe{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">
+        <i class="fas fa-edit"></i> Edit Password Entry
+    </h2>
+
+    <!-- Message Section -->
+    {% if messages %}
+    <div class="mb-4">
+        {% for message in messages %}
+            {% if "dashboard" in message.tags %}
+                <div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert">
+                    <i class="fas fa-info-circle me-2"></i> {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Edit Entry Form -->
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form method="post" class="border p-4 bg-light rounded shadow">
+                {% csrf_token %}
+                
+                <!-- Title Field -->
+                <div class="mb-3">
+                    <label for="id_title" class="form-label">
+                        <i class="fas fa-heading"></i> Title
+                    </label>
+                    <input 
+                        type="text" 
+                        id="id_title" 
+                        name="title" 
+                        class="form-control shadow-sm" 
+                        value="{{ form.title.value }}" 
+                        placeholder="Enter title (e.g., My Email Account)" 
+                        required
+                    >
+                </div>
+
+                <!-- Username Field -->
+                <div class="mb-3">
+                    <label for="id_username" class="form-label">
+                        <i class="fas fa-user"></i> Username
+                    </label>
+                    <input 
+                        type="text" 
+                        id="id_username" 
+                        name="username" 
+                        class="form-control shadow-sm" 
+                        value="{{ form.username.value }}" 
+                        placeholder="Enter username or email" 
+                        required
+                    >
+                </div>
+
+                <!-- Password Field -->
+                <div class="mb-3 position-relative">
+                    <label for="id_password_entry" class="form-label">
+                        <i class="fas fa-lock"></i> Password
+                    </label>
+                    <div class="input-group">
+                        <input 
+                            type="text" 
+                            id="id_password_entry" 
+                            name="password_entry" 
+                            class="form-control shadow-sm" 
+                            value="{{ form.password_entry.value }}" 
+                            placeholder="Enter or update your password" 
+                            required
+                        >
+                        <button 
+                            type="button" 
+                            class="btn btn-outline-secondary" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#passwordGeneratorModal"
+                        >
+                            <i class="fas fa-key"></i> Generate
+                        </button>
+                    </div>
+                </div>
+
+                <!-- URL Field -->
+                <div class="mb-3">
+                    <label for="id_url" class="form-label">
+                        <i class="fas fa-link"></i> URL
+                    </label>
+                    <input 
+                        type="url" 
+                        id="id_url" 
+                        name="url" 
+                        class="form-control shadow-sm" 
+                        value="{{ form.url.value }}" 
+                        placeholder="Enter URL (e.g., https://example.com)"
+                    >
+                </div>
+
+                <!-- Notes Field -->
+                <div class="mb-3">
+                    <label for="id_notes" class="form-label">
+                        <i class="fas fa-sticky-note"></i> Notes
+                    </label>
+                    <textarea 
+                        id="id_notes" 
+                        name="notes" 
+                        class="form-control shadow-sm" 
+                        rows="4" 
+                        placeholder="Add any additional notes here"
+                    >{{ form.notes.value }}</textarea>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                    <a href="{% url 'password_vault:vault_dashboard' %}" class="btn btn-secondary">
+                        <i class="fas fa-times"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Password Generator Modal -->
+<div class="modal fade" id="passwordGeneratorModal" tabindex="-1" aria-labelledby="passwordGeneratorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="passwordGeneratorModalLabel">
+                    <i class="fas fa-key me-2"></i> Password Generator
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-light">
+                <form id="password-generator-form">
+                    {% csrf_token %}
+
+                    <!-- Length Input -->
+                    <div class="mb-3">
+                        <label for="password-length" class="form-label">
+                            <i class="fas fa-arrows-alt-h me-2"></i> Password Length
+                        </label>
+                        <input 
+                            type="number" 
+                            class="form-control shadow-sm" 
+                            id="password-length" 
+                            name="length" 
+                            value="12" 
+                            min="8" 
+                            max="64" 
+                            required
+                        >
+                    </div>
+
+                    <!-- Character Types -->
+                    <label class="form-label">
+                        <i class="fas fa-cogs me-2"></i> Character Types
+                    </label>
+                    <div class="form-check">
+                        <input 
+                            class="form-check-input" 
+                            type="checkbox" 
+                            id="include-uppercase" 
+                            name="include_uppercase" 
+                            checked
+                        >
+                        <label class="form-check-label" for="include-uppercase">A-Z (Uppercase Letters)</label>
+                    </div>
+                    <div class="form-check">
+                        <input 
+                            class="form-check-input" 
+                            type="checkbox" 
+                            id="include-lowercase" 
+                            name="include_lowercase" 
+                            checked
+                        >
+                        <label class="form-check-label" for="include-lowercase">a-z (Lowercase Letters)</label>
+                    </div>
+                    <div class="form-check">
+                        <input 
+                            class="form-check-input" 
+                            type="checkbox" 
+                            id="include-numbers" 
+                            name="include_numbers" 
+                            checked
+                        >
+                        <label class="form-check-label" for="include-numbers">0-9 (Numbers)</label>
+                    </div>
+                    <div class="form-check">
+                        <input 
+                            class="form-check-input" 
+                            type="checkbox" 
+                            id="include-symbols" 
+                            name="include_symbols"
+                        >
+                        <label class="form-check-label" for="include-symbols">Symbols (!@#$...)</label>
+                    </div>
+
+                    <!-- Generate Password Button -->
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn btn-success" onclick="generatePassword()">
+                            <i class="fas fa-magic me-2"></i> Generate Password
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Generated Password -->
+                <div class="mt-4">
+                    <h5 class="mb-3 text-center">
+                        <i class="fas fa-lock-open me-2"></i> Generated Password
+                    </h5>
+                    <div class="input-group">
+                        <input 
+                            type="text" 
+                            id="generated-password" 
+                            class="form-control shadow-sm" 
+                            readonly
+                        >
+                        <button type="button" class="btn btn-outline-secondary" onclick="copyToClipboard()">
+                            <i class="fas fa-copy me-2"></i> Copy
+                        </button>
+                    </div>
+                    <div id="copy-message" class="mt-2 text-success text-center" style="display: none;">
+                        <i class="fas fa-check-circle me-2"></i> Password copied to clipboard!
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i> Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="{% static 'password_generator/js/generate_password.js' %}"></script>
+<script src="{% static 'password_generator/js/copy_password.js' %}"></script>
+{% endblock %}
