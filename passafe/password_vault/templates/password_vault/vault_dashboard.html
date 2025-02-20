@@ -98,7 +98,18 @@
                     {% for entry in entries %}
                     <tr>
                         <td class="searchable">{{ entry.title }}</td>
-                        <td class="searchable">{{ entry.username }}</td>
+                        <td class="searchable">
+                            {{ entry.username }}
+                            <!-- Copy username -->
+                            <button
+                                type="button"
+                                class="btn btn-outline-secondary btn-sm ms-2"
+                                onclick="copyUsername('{{ entry.username|escapejs }}')"
+                                title="Copy Username"
+                            >
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </td>
                         <td>{{ entry.created_at|date:"M d, Y, h:i A" }}</td>
                         <td>{{ entry.modified_at|date:"M d, Y, h:i A" }}</td>
                         <td>
@@ -236,7 +247,18 @@
                                     {% for entry in folder.entries.all %}
                                     <tr>
                                         <td class="searchable">{{ entry.title }}</td>
-                                        <td class="searchable">{{ entry.username }}</td>
+                                        <td class="searchable">
+                                            {{ entry.username }}
+                                            <!-- Copy username -->
+                                            <button
+                                                type="button"
+                                                class="btn btn-outline-secondary btn-sm ms-2"
+                                                onclick="copyUsername('{{ entry.username|escapejs }}')"
+                                                title="Copy Username"
+                                            >
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                        </td>
                                         <td>{{ entry.created_at|date:"M d, Y, h:i A" }}</td>
                                         <td>{{ entry.modified_at|date:"M d, Y, h:i A" }}</td>
                                         <td>
@@ -334,11 +356,11 @@
             </div>
         </div>
     </div>
-
 </div>
 
 <script src="{% static 'password_vault/js/view_password.js' %}"></script>
 <script src="{% static 'password_vault/js/folder_menu.js' %}"></script>
 <script src="{% static 'password_vault/js/actions.js' %}"></script>
+<script src="{% static 'password_vault/js/copyUsername.js' %}"></script>
 <script src="{% static 'search/js/search.js' %}"></script>
 {% endblock %}
