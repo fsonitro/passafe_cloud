@@ -44,7 +44,6 @@ class LoginActivity(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     ip_address = models.GenericIPAddressField(null=True, blank=True)
     user_agent = models.TextField(null=True, blank=True)
-    # location = models.CharField(max_length=255, null=True, blank=True)  # optional
     timestamp = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
