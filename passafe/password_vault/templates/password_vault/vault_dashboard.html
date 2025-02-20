@@ -89,6 +89,7 @@
                     <tr>
                         <th>Title</th>
                         <th>Username</th>
+                        <th>URL</th>
                         <th>Created At</th>
                         <th>Last Modified</th>
                         <th>Actions</th>
@@ -109,6 +110,9 @@
                             >
                                 <i class="fas fa-copy"></i>
                             </button>
+                        </td>
+                        <td class="searchable">
+                            <a href="{{ entry.url }}" target="_blank">{{ entry.url }}</a>
                         </td>
                         <td>{{ entry.created_at|date:"M d, Y, h:i A" }}</td>
                         <td>{{ entry.modified_at|date:"M d, Y, h:i A" }}</td>
@@ -133,11 +137,11 @@
                             <i class="fas fa-eye"></i> View
                         </button>
                         <span id="password-{{ entry.id }}" class="hidden-password"></span>
-                        </td>
+                    </td>
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="5" class="text-center text-muted">No ungrouped entries found.</td>
+                        <td colspan="6" class="text-center text-muted">No ungrouped entries found.</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -238,6 +242,7 @@
                                     <tr>
                                         <th>Title</th>
                                         <th>Username</th>
+                                        <th>URL</th>
                                         <th>Created At</th>
                                         <th>Last Modified</th>
                                         <th>Actions</th>
@@ -259,6 +264,9 @@
                                                 <i class="fas fa-copy"></i>
                                             </button>
                                         </td>
+                                        <td class="searchable">
+                                            <a href="{{ entry.url }}" target="_blank">{{ entry.url }}</a>
+                                        </td>
                                         <td>{{ entry.created_at|date:"M d, Y, h:i A" }}</td>
                                         <td>{{ entry.modified_at|date:"M d, Y, h:i A" }}</td>
                                         <td>
@@ -271,11 +279,11 @@
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#deleteEntryModal"
                                                 data-entry-id="{{ entry.id }}"
-                                            >
+                                                >
                                                 <i class="fas fa-trash"></i> Delete
                                             </button>
                                             <button
-                                            type="button"
+                                                type="button"
                                             class="btn btn-primary btn-sm"
                                             onclick="viewPassword('{{ entry.id }}', this)"
                                             >
@@ -358,9 +366,11 @@
     </div>
 </div>
 
-<script src="{% static 'password_vault/js/view_password.js' %}"></script>
+<!-- Custom scripts -->
+<script src="{% static 'password_vault/js/view_password.js' %}"></script> 
 <script src="{% static 'password_vault/js/folder_menu.js' %}"></script>
 <script src="{% static 'password_vault/js/actions.js' %}"></script>
 <script src="{% static 'password_vault/js/copyUsername.js' %}"></script>
+<script src="{% static 'password_vault/js/copyPassword.js' %}"></script>
 <script src="{% static 'search/js/search.js' %}"></script>
 {% endblock %}
