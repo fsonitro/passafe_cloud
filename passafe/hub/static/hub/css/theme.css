@@ -11,7 +11,7 @@
     --card-background: #1e1e1e;
     --muted-link-color: #b3b3b3;
     --text-color: #e0e0e0; /* Improved dark theme text color */
-    --background-color: #121212; /* Dark theme background color */
+    --background-color: rgb(32, 41, 55); /* Updated dark theme background color */
 }
 
 body {
