@@ -1,0 +1,149 @@
+/**
+ * Dark theme fixes specifically for account settings
+ * These styles ensure all elements are visible in dark mode
+ */
+
+/* Fix card styles in dark mode */
+[data-theme="dark"] .card {
+    background-color: var(--card-bg, #1e1e1e) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+}
+
+/* Ensure card headers have proper contrast */
+[data-theme="dark"] .card-header {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    border-bottom: 1px solid var(--border-color, #2d2d2d) !important;
+    color: var(--text-color, #e9ecef) !important;
+}
+
+/* Override Bootstrap's bg-white styling on card headers */
+[data-theme="dark"] .bg-white,
+[data-theme="dark"] .bg-light {
+    background-color: var(--card-bg, #1e1e1e) !important;
+    color: var(--text-color, #e9ecef) !important;
+}
+
+/* Make sure headings are visible */
+[data-theme="dark"] h1, 
+[data-theme="dark"] h2, 
+[data-theme="dark"] h3, 
+[data-theme="dark"] h4, 
+[data-theme="dark"] h5, 
+[data-theme="dark"] h6 {
+    color: var(--text-color, #e9ecef) !important;
+}
+
+/* Fix text-muted visibility */
+[data-theme="dark"] .text-muted {
+    color: #adb5bd !important;
+}
+
+/* Improve form field visibility */
+[data-theme="dark"] .form-control {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-color, #e9ecef) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+}
+
+/* Fix disabled inputs in dark mode */
+[data-theme="dark"] .form-control:disabled,
+[data-theme="dark"] .form-control[readonly],
+[data-theme="dark"] .form-control.bg-light {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+}
+
+/* Make form text more visible */
+[data-theme="dark"] .form-text {
+    color: #adb5bd !important;
+}
+
+/* Keep QR code background light for better scanning */
+.qr-bg {
+    background-color: #ffffff !important;
+}
+
+/* Fix alert styling in dark mode */
+[data-theme="dark"] .alert-info {
+    background-color: rgba(13, 202, 240, 0.15) !important;
+    border-color: rgba(13, 202, 240, 0.4) !important;
+    color: #0dcaf0 !important;
+}
+
+/* Fix button colors in dark mode */
+[data-theme="dark"] .btn-outline-primary {
+    color: #6ea8fe !important;
+    border-color: #6ea8fe !important;
+}
+
+[data-theme="dark"] .btn-outline-primary:hover {
+    background-color: rgba(110, 168, 254, 0.1) !important;
+}
+
+[data-theme="dark"] .btn-outline-secondary {
+    color: #a7acb1 !important;
+    border-color: #a7acb1 !important;
+}
+
+[data-theme="dark"] .btn-outline-secondary:hover {
+    background-color: rgba(167, 172, 177, 0.1) !important;
+}
+
+[data-theme="dark"] .btn-outline-success {
+    color: #75b798 !important;
+    border-color: #75b798 !important;
+}
+
+[data-theme="dark"] .btn-outline-success:hover {
+    background-color: rgba(117, 183, 152, 0.1) !important;
+}
+
+[data-theme="dark"] .btn-outline-danger {
+    color: #ea868f !important;
+    border-color: #ea868f !important;
+}
+
+[data-theme="dark"] .btn-outline-danger:hover {
+    background-color: rgba(234, 134, 143, 0.1) !important;
+}
+
+[data-theme="dark"] .btn-outline-warning {
+    color: #ffda6a !important;
+    border-color: #ffda6a !important;
+}
+
+[data-theme="dark"] .btn-outline-warning:hover {
+    background-color: rgba(255, 218, 106, 0.1) !important;
+}
+
+/* Fix modal content in dark mode */
+[data-theme="dark"] .modal-content {
+    background-color: var(--card-bg, #1e1e1e) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+    color: var(--text-color, #e9ecef) !important;
+}
+
+[data-theme="dark"] .modal-header {
+    border-bottom-color: var(--border-color, #2d2d2d) !important;
+}
+
+/* Fix close button contrast */
+[data-theme="dark"] .btn-close {
+    filter: brightness(0) invert(1) !important;
+}
+
+/* Button hover effects */
+.btn {
+    transition: all 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure proper contrast for sections */
+[data-theme="dark"] .card-body {
+    color: var(--text-color, #e9ecef) !important;
+}

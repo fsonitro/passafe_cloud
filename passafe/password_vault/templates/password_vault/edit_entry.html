@@ -4,6 +4,9 @@
 
 {% block content %}
 {% load static %}
+<!-- Include custom CSS for dark theme support -->
+<link rel="stylesheet" href="{% static 'password_vault/css/edit_entry_dark.css' %}">
+
 <div class="container mt-5">
     <h2 class="text-center mb-4">
         <i class="fas fa-edit"></i> Edit Password Entry
@@ -243,7 +246,6 @@
     </div>
 </div>
 
-
-<script src="{% static 'password_generator/js/generate_password.js' %}"></script>
-<script src="{% static 'password_generator/js/copy_password.js' %}"></script>
+<!-- Password utilities script -->
+<script src="{% static 'password_generator/js/password_utilities.js' %}"></script>
 {% endblock %}

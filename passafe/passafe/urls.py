@@ -35,7 +35,7 @@ urlpatterns = [
     path('password_generator/', include('password_generator.urls', namespace='password_generator')),
     # Include URLs from the search app with namespace 'search'
     path('search/', include('search.urls', namespace='search')),
-]
+    ]
 
 # Serve media files during development
 if settings.DEBUG:

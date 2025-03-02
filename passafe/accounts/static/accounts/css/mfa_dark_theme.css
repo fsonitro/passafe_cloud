@@ -1,0 +1,92 @@
+/**
+ * Additional dark theme styles for MFA-related pages
+ */
+
+/* Enhanced input styling for verification codes */
+[data-theme="dark"] input#mfa_code,
+[data-theme="dark"] input#id_reset_token {
+    font-family: 'Courier New', monospace;
+    font-size: 1.5rem;
+    letter-spacing: 3px;
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    color: var(--text-color, #e9ecef) !important;
+    border-color: rgba(74, 108, 250, 0.3) !important;
+    text-align: center;
+    padding: 1rem 0.75rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+/* Highlight effect when focused with pulse animation */
+[data-theme="dark"] input#mfa_code:focus,
+[data-theme="dark"] input#id_reset_token:focus {
+    background-color: rgba(74, 108, 250, 0.1) !important;
+    border-color: rgba(74, 108, 250, 0.6) !important;
+    box-shadow: 0 0 0 0.25rem rgba(74, 108, 250, 0.25) !important;
+    animation: inputPulse 2s infinite;
+}
+
+@keyframes inputPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(74, 108, 250, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 8px rgba(74, 108, 250, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(74, 108, 250, 0);
+    }
+}
+
+/* Enhanced style for verification heading */
+[data-theme="dark"] .verification-header {
+    color: var(--text-color, #e9ecef) !important;
+    margin-bottom: 1.5rem;
+}
+
+/* Enhance verification instructions */
+[data-theme="dark"] .verification-instructions {
+    color: #adb5bd !important;
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+}
+
+/* Style QR code container for MFA setup */
+[data-theme="dark"] .qr-code-container {
+    background-color: white !important; /* Keep white for better QR scanning */
+    padding: 1rem;
+    border-radius: 8px;
+    display: inline-block;
+    margin-bottom: 2rem;
+}
+
+/* Fix form-related issues in verification pages */
+[data-theme="dark"] .form-card,
+[data-theme="dark"] .border.p-4.bg-light.rounded.shadow {
+    background-color: var(--card-bg, #1e1e1e) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+    border: 1px solid var(--border-color, #2d2d2d) !important;
+}
+
+/* Improve alerts in verification pages */
+[data-theme="dark"] .alert-info {
+    background-color: rgba(13, 202, 240, 0.15) !important;
+    border-color: rgba(13, 202, 240, 0.4) !important;
+    color: #0dcaf0 !important;
+    border-radius: 8px;
+}
+
+/* Enhanced button styles for verification pages */
+[data-theme="dark"] .verification-form .btn-primary,
+[data-theme="dark"] form .btn-primary {
+    padding: 0.75rem 2rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Add a subtle shadow to the form container */
+[data-theme="dark"] .verification-form,
+[data-theme="dark"] form.border {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15) !important;
+}

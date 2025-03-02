@@ -1,0 +1,205 @@
+/**
+ * Dark theme styles for password entry editing page
+ * Ensures proper visibility of all form elements in dark mode
+ */
+
+/* Fix form background in dark mode */
+[data-theme="dark"] form.border.p-4.bg-light {
+    background-color: var(--card-bg, #1e1e1e) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+    color: var(--text-color, #e9ecef);
+}
+
+/* Fix form labels */
+[data-theme="dark"] .form-label {
+    color: var(--text-color, #e9ecef);
+    font-weight: 500;
+}
+
+/* Improve form control visibility */
+[data-theme="dark"] .form-control {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-color, #e9ecef) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+}
+
+[data-theme="dark"] .form-control:focus {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(74, 108, 250, 0.5) !important;
+    box-shadow: 0 0 0 0.25rem rgba(74, 108, 250, 0.25) !important;
+}
+
+/* Fix placeholder text */
+[data-theme="dark"] .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+    opacity: 1;
+}
+
+/* Improve button styling */
+[data-theme="dark"] .btn-primary {
+    background-color: rgba(13, 110, 253, 0.8) !important;
+    border-color: rgba(13, 110, 253, 0.9) !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .btn-primary:hover {
+    background-color: rgba(13, 110, 253, 0.9) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .btn-secondary {
+    background-color: rgba(108, 117, 125, 0.8) !important;
+    border-color: rgba(108, 117, 125, 0.9) !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+    background-color: rgba(108, 117, 125, 0.9) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .btn-outline-secondary {
+    color: #ced4da !important;
+    border-color: rgba(108, 117, 125, 0.5) !important;
+    background-color: transparent !important;
+}
+
+[data-theme="dark"] .btn-outline-secondary:hover {
+    background-color: rgba(108, 117, 125, 0.1) !important;
+    color: #e9ecef !important;
+}
+
+/* Fix password generator modal */
+[data-theme="dark"] .modal-content {
+    background-color: var(--card-bg, #1e1e1e) !important;
+    color: var(--text-color, #e9ecef) !important;
+    border: none !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5) !important;
+}
+
+[data-theme="dark"] .modal-body.bg-light {
+    background-color: var(--card-bg, #1e1e1e) !important;
+}
+
+[data-theme="dark"] .modal-footer.bg-light {
+    background-color: var(--card-bg, #1e1e1e) !important;
+    border-top-color: var(--border-color, #2d2d2d) !important;
+}
+
+/* Fix headers */
+[data-theme="dark"] .modal-header.bg-primary {
+    background-color: rgba(13, 110, 253, 0.8) !important;
+}
+
+/* Fix button in input group */
+[data-theme="dark"] .input-group .btn {
+    border-color: var(--border-color, #2d2d2d) !important;
+}
+
+/* Fix checkbox appearance */
+[data-theme="dark"] .form-check-input {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+[data-theme="dark"] .form-check-input:checked {
+    background-color: var(--primary-color, #0d6efd);
+    border-color: var(--primary-color, #0d6efd);
+}
+
+[data-theme="dark"] .form-check-label {
+    color: var(--text-color, #e9ecef);
+}
+
+/* Fix textarea appearance */
+[data-theme="dark"] textarea.form-control {
+    min-height: 120px;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-color, #e9ecef) !important;
+}
+
+/* Fix close button contrast */
+[data-theme="dark"] .btn-close-white {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* Fix success button */
+[data-theme="dark"] .btn-success {
+    background-color: rgba(40, 167, 69, 0.8) !important;
+    border-color: rgba(40, 167, 69, 0.9) !important;
+}
+
+[data-theme="dark"] .btn-success:hover {
+    background-color: rgba(40, 167, 69, 0.9) !important;
+}
+
+/* Fix success text */
+[data-theme="dark"] .text-success {
+    color: #75b798 !important;
+}
+
+/* Add focus glow effect to fields */
+[data-theme="dark"] .form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(74, 108, 250, 0.25) !important;
+}
+
+/* Fix alerts */
+[data-theme="dark"] .alert-info {
+    background-color: rgba(13, 202, 240, 0.15) !important;
+    border-color: rgba(13, 202, 240, 0.4) !important;
+    color: #0dcaf0 !important;
+}
+
+/* Additional styling for consistent form appearance */
+[data-theme="dark"] .container h2 {
+    color: var(--text-color, #e9ecef) !important;
+}
+
+/* Fix default box style used in create entry page */
+[data-theme="dark"] .box {
+    background-color: var(--card-bg, #1e1e1e) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+    color: var(--text-color, #e9ecef) !important;
+}
+
+/* Enhance disabled form inputs */
+[data-theme="dark"] .form-control:disabled,
+[data-theme="dark"] .form-control[readonly] {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+}
+
+/* Enhance icon buttons in form controls */
+[data-theme="dark"] .input-group-text {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-color, #e9ecef) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+}
+
+/* Improve focus indicators for better accessibility */
+[data-theme="dark"] .form-control:focus,
+[data-theme="dark"] .form-check-input:focus {
+    border-color: rgba(74, 108, 250, 0.6) !important;
+    box-shadow: 0 0 0 0.25rem rgba(74, 108, 250, 0.25) !important;
+}
+
+/* Fix the specific form background in both templates */
+[data-theme="dark"] form.border.p-4.bg-light.rounded.shadow {
+    background-color: var(--card-bg, #1e1e1e) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+}
+
+/* Add animation for form feedback */
+@keyframes formHighlight {
+    0% { box-shadow: 0 0 0 0 rgba(74, 108, 250, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(74, 108, 250, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(74, 108, 250, 0); }
+}
+
+/* Apply animation to invalid fields */
+[data-theme="dark"] .form-control:invalid:focus {
+    animation: formHighlight 1.5s ease-out;
+}

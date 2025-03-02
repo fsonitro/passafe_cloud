@@ -4,7 +4,6 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_protect
 from django.shortcuts import render
-import math
 
 @csrf_protect  # Enable CSRF protection for security
 @require_POST
@@ -35,34 +34,13 @@ def generate_password(request):
         # Generate password from selected characters
         password = ''.join(random.choice(characters) for _ in range(length))
 
-        # Calculate entropy in bits
-        pool_size = len(characters)
-        entropy_bits = round(length * math.log2(pool_size), 2)  # Using log2 for bits
-
-        # Determine quality based on entropy in bits
-        if entropy_bits < 40:
-            quality = "Very Poor"
-        elif entropy_bits < 60:
-            quality = "Weak"
-        elif entropy_bits < 80:
-            quality = "Moderate"
-        elif entropy_bits < 100:
-            quality = "Strong"
-        elif entropy_bits < 128:
-            quality = "Very Strong"
-        else:
-            quality = "Excellent"
-
-
-        # Return JSON response with generated password, entropy in bits, and quality
+        # Return JSON response with generated password and length
         return JsonResponse({
             "password": password,
-            "entropy": entropy_bits,
-            "quality": quality,
             "length": length
         })
     
-    except ValueError as e:
+    except ValueError:
         # Handle possible conversion errors for length and other parameters
         return JsonResponse({"error": "Invalid input data"}, status=400)
     except Exception as e:

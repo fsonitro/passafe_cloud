@@ -1,0 +1,36 @@
+.copy-notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;  /* Center horizontally */
+    transform: translateX(-50%) translateY(-20px);  /* Center and initial position above viewport */
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 9999;
+    text-align: center;
+    min-width: 200px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.copy-notification.success {
+    background-color: #28a745;
+}
+
+.copy-notification.error {
+    background-color: #dc3545;
+}
+
+.copy-notification.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);  /* Slide down to visible position */
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .copy-notification {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    }
+}

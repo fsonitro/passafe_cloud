@@ -1,10 +1,21 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Verify MFA - PasSafe{% endblock %}
 
 {% block content %}
+<!-- Include the auth dark theme CSS -->
+<link rel="stylesheet" href="{% static 'accounts/css/auth_dark_theme.css' %}">
+<!-- Include the MFA-specific dark theme CSS -->
+<link rel="stylesheet" href="{% static 'accounts/css/mfa_dark_theme.css' %}">
+
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Verify MFA</h2>
+    <h2 class="text-center mb-2 verification-header">
+        <i class="fas fa-shield-alt"></i> Two-Factor Authentication
+    </h2>
+    <p class="text-center text-muted verification-instructions">
+        Enter the 6-digit verification code from your authenticator app
+    </p>
 
     <!-- Message Section -->
     {% if messages %}
@@ -23,17 +34,29 @@
     <!-- MFA Verification Form -->
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <form method="post" class="border p-4 bg-light rounded shadow">
+            <form method="post" class="border p-4 bg-light rounded shadow verification-form">
                 {% csrf_token %}
                 <div class="mb-3">
-                    <label for="mfa_code" class="form-label">Enter the code from your authenticator app:</label>
-                    <input type="text" name="mfa_code" id="mfa_code" class="form-control" required>
+                    <input type="text" 
+                           name="mfa_code" 
+                           id="mfa_code" 
+                           class="form-control form-control-lg" 
+                           placeholder="Enter 6-digit code"
+                           maxlength="6" 
+                           pattern="[0-9]{6}"
+                           autocomplete="off"
+                           required>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary btn-block">Verify</button>
+                    <button type="submit" class="btn btn-primary px-4 py-2">
+                        <i class="fas fa-check-circle"></i> Verify
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<!-- Include the verification code enhancement script -->
+<script src="{% static 'accounts/js/verification_code.js' %}"></script>
 {% endblock %}

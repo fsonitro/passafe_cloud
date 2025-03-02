@@ -1,0 +1,388 @@
+/* Base CSS file for PasSafe with enhanced theming */
+
+/* Base theme variables */
+:root {
+    --primary-color: #4a6cfa;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --navbar-height: 70px;
+    --footer-bg: #212529;
+    --transition-speed: 0.3s;
+    
+    /* Common theme variables */
+    --border-radius: 6px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+}
+
+/* Light theme variables (default) */
+:root {
+    --bg-color: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --text-color: #212529;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+    --card-bg: #ffffff;
+    --card-border: #e9ecef;
+    --nav-bg: #212529;
+    --nav-text: #ffffff;
+    --btn-default-bg: #e9ecef;
+    --btn-default-text: #212529;
+    --footer-text: #f8f9fa;
+    --link-color: #4a6cfa;
+    --link-hover: #1d43e8;
+}
+
+/* Dark theme variables */
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --bg-secondary: #1e1e1e;
+    --text-color: #e9ecef;
+    --text-muted: #adb5bd;
+    --border-color: #2d2d2d;
+    --card-bg: #1e1e1e;
+    --card-border: #2d2d2d;
+    --nav-bg: #212529;
+    --nav-text: #ffffff;
+    --btn-default-bg: #343a40;
+    --btn-default-text: #e9ecef;
+    --footer-text: #f8f9fa;
+    --link-color: #6c8efa;
+    --link-hover: #97b4ff;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.3);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.3);
+}
+
+/* Base element styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    padding-top: var(--navbar-height);
+}
+
+/* Apply theme to common elements */
+a {
+    color: var(--link-color);
+    transition: color var(--transition-speed);
+}
+
+a:hover {
+    color: var(--link-hover);
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-color: var(--card-border);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-speed);
+}
+
+.btn {
+    border-radius: var(--border-radius);
+    transition: all var(--transition-speed);
+}
+
+.btn-default {
+    background-color: var(--btn-default-bg);
+    color: var(--btn-default-text);
+}
+
+hr {
+    border-color: var(--border-color);
+}
+
+input, select, textarea {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+    transition: all var(--transition-speed);
+}
+
+/* Navbar styles */
+.navbar {
+    height: var(--navbar-height);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-speed);
+    background-color: var(--nav-bg) !important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: var(--nav-text);
+}
+
+.navbar-brand {
+    font-weight: 600;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    color: var(--nav-text) !important;
+}
+
+.navbar-brand img {
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover img {
+    transform: rotate(10deg);
+}
+
+.nav-link {
+    position: relative;
+    margin: 0 5px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.nav-link:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s;
+}
+
+.nav-link:hover:after {
+    width: 100%;
+}
+
+.theme-toggle {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.2);
+    color: var(--nav-text);
+}
+
+.theme-toggle:hover {
+    transform: rotate(30deg);
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* Footer styles */
+footer {
+    background-color: var(--footer-bg);
+    padding: 3rem 0 1.5rem;
+    transition: background-color var(--transition-speed);
+}
+
+footer h5 {
+    color: var(--footer-text);
+}
+
+.footer-links {
+    text-align: left;
+}
+
+.footer-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s, transform 0.2s;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.footer-links a:hover {
+    color: var(--footer-text);
+    transform: translateX(5px);
+}
+
+.footer-social a {
+    display: inline-flex;
+    margin-right: 15px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.1);
+    transition: all 0.3s;
+}
+
+.footer-social a:hover {
+    transform: translateY(-3px);
+    background: var(--primary-color);
+}
+
+.footer-bottom {
+    padding-top: 1.5rem;
+    margin-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Animation utilities */
+.hover-lift {
+    transition: transform 0.2s;
+}
+
+.hover-lift:hover {
+    transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+    .footer-section {
+        margin-bottom: 2rem;
+    }
+}
+
+/* Theme-specific component styles */
+[data-theme="dark"] .dropdown-menu {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .dropdown-item {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .dropdown-item:hover {
+    background-color: var(--bg-secondary);
+}
+
+[data-theme="dark"] .card-header {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .modal-content {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .close {
+    color: var(--text-color);
+}
+
+/* Additional styles for form elements in dark theme */
+[data-theme="dark"] .form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(74, 108, 250, 0.25);
+}
+
+[data-theme="dark"] ::placeholder {
+    color: var(--text-muted) !important;
+    opacity: 0.7;
+}
+
+/* Table styles for dark theme */
+[data-theme="dark"] .table {
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .table-hover tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.075);
+}
+
+/* Fix table header visibility in dark theme */
+[data-theme="dark"] .table-primary,
+[data-theme="dark"] .table-primary > th,
+[data-theme="dark"] .table-primary > td {
+    background-color: rgba(74, 108, 250, 0.2) !important;
+    color: var(--text-color) !important;
+}
+
+/* Improved form field styling for dark theme */
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .form-control:focus,
+[data-theme="dark"] .form-select:focus {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 0 0 0.25rem rgba(74, 108, 250, 0.25) !important;
+}
+
+[data-theme="dark"] .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Fix for disabled inputs in dark mode */
+[data-theme="dark"] .form-control:disabled,
+[data-theme="dark"] .form-control[readonly] {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Ensure dropdown menus are visible in dark mode */
+[data-theme="dark"] .dropdown-menu {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .dropdown-item {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .dropdown-item:hover,
+[data-theme="dark"] .dropdown-item:focus {
+    color: var(--text-color);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Fix card headers in dark mode */
+[data-theme="dark"] .card-header {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Fix modal content in dark mode */
+[data-theme="dark"] .modal-content {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .modal-header,
+[data-theme="dark"] .modal-footer {
+    border-color: var(--border-color);
+}
+
+/* Fix close button in dark mode */
+[data-theme="dark"] .btn-close {
+    filter: brightness(0) invert(1);
+}
+
+/* Fix accordion in dark mode */
+[data-theme="dark"] .accordion-item {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .accordion-button {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .accordion-button:not(.collapsed) {
+    background-color: rgba(74, 108, 250, 0.1);
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .accordion-button::after {
+    filter: brightness(0) invert(1);
+}
+
+/* Fix alerts in dark mode */
+[data-theme="dark"] .alert-info {
+    background-color: rgba(13, 202, 240, 0.15);
+    border-color: rgba(13, 202, 240, 0.4);
+    color: #0dcaf0;
+}

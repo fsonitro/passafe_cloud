@@ -1,0 +1,356 @@
+/**
+ * Enhanced dark theme styling for Password Vault Dashboard
+ * This provides better visibility and user experience in dark mode
+ */
+
+/* Base container styles */
+[data-theme="dark"] .container {
+    color: var(--text-color, #e9ecef);
+}
+
+/* Headings with improved visibility */
+[data-theme="dark"] h1, 
+[data-theme="dark"] h2, 
+[data-theme="dark"] h3, 
+[data-theme="dark"] h4, 
+[data-theme="dark"] h5, 
+[data-theme="dark"] h6 {
+    color: var(--text-color, #e9ecef) !important;
+}
+
+/* Fix search container */
+[data-theme="dark"] .search-container {
+    margin-bottom: 1.5rem;
+}
+
+/* Enhanced search input styling */
+[data-theme="dark"] #search-bar {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-color, #e9ecef) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
+}
+
+[data-theme="dark"] #search-bar:focus {
+    box-shadow: 0 0 0 0.25rem rgba(74, 108, 250, 0.25) !important;
+    background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Quick actions box */
+[data-theme="dark"] .box {
+    background-color: var(--card-bg, #1e1e1e) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .box:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Enhanced table styling for better visibility */
+[data-theme="dark"] .table {
+    color: var(--text-color, #e9ecef);
+    border-color: var(--border-color, #2d2d2d);
+    background-color: transparent !important;
+    border: 1px solid var(--border-color, #2d2d2d);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Fix header visibility */
+[data-theme="dark"] .table-primary {
+    background-color: rgba(74, 108, 250, 0.2) !important;
+    border: none !important;
+}
+
+[data-theme="dark"] .table-primary th {
+    color: var(--text-color, #e9ecef) !important;
+    font-weight: 600;
+    border-bottom: 2px solid rgba(74, 108, 250, 0.3) !important;
+    padding: 12px 8px;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+/* Improve table row styling */
+[data-theme="dark"] .table-striped > tbody > tr:nth-of-type(odd) > * {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+    color: var(--text-color, #e9ecef) !important;
+}
+
+[data-theme="dark"] .table-striped > tbody > tr:nth-of-type(even) > * {
+    background-color: transparent !important;
+    color: var(--text-color, #e9ecef) !important;
+}
+
+[data-theme="dark"] .table-hover > tbody > tr:hover > * {
+    background-color: rgba(74, 108, 250, 0.08) !important;
+    color: var(--text-color, #e9ecef) !important;
+}
+
+/* Improve table cell styling */
+[data-theme="dark"] .table td {
+    border-color: rgba(255, 255, 255, 0.05) !important;
+    padding: 12px 8px;
+    vertical-align: middle;
+    font-size: 0.95rem;
+}
+
+/* Fix column spacing and text wrapping */
+[data-theme="dark"] .table td:nth-child(1) {
+    font-weight: 500;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+[data-theme="dark"] .table td:nth-child(2) {
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+[data-theme="dark"] .table td:nth-child(3) {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Links within tables */
+[data-theme="dark"] .table a {
+    color: var(--link-color, #6c8efa);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+[data-theme="dark"] .table a:hover {
+    color: var(--link-hover, #97b4ff);
+}
+
+/* Better button styling within tables */
+[data-theme="dark"] .table .btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    margin-right: 3px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Give action buttons group a better layout */
+[data-theme="dark"] .table td:last-child {
+    white-space: nowrap;
+    text-align: right;
+}
+
+/* Add a subtle separator between button groups */
+[data-theme="dark"] .table .btn-sm + .btn-sm {
+    margin-left: 2px;
+}
+
+/* Fix table responsiveness in dark mode */
+[data-theme="dark"] .table-responsive {
+    background-color: transparent;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-color, #2d2d2d);
+}
+
+/* Fix edit button */
+[data-theme="dark"] .btn-warning {
+    background-color: rgba(255, 193, 7, 0.15) !important;
+    border-color: rgba(255, 193, 7, 0.5) !important;
+    color: #ffd666 !important;
+    font-weight: 500;
+}
+
+[data-theme="dark"] .btn-warning:hover {
+    background-color: rgba(255, 193, 7, 0.25) !important;
+    color: #ffe699 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Fix delete button */
+[data-theme="dark"] .btn-danger {
+    background-color: rgba(220, 53, 69, 0.15) !important;
+    border-color: rgba(220, 53, 69, 0.5) !important;
+    color: #f5c2c7 !important;
+    font-weight: 500;
+}
+
+[data-theme="dark"] .btn-danger:hover {
+    background-color: rgba(220, 53, 69, 0.25) !important;
+    color: #f8d7da !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Fix view/primary button */
+[data-theme="dark"] .btn-primary {
+    background-color: rgba(13, 110, 253, 0.15) !important;
+    border-color: rgba(13, 110, 253, 0.5) !important;
+    color: #9ec5fe !important;
+    font-weight: 500;
+}
+
+[data-theme="dark"] .btn-primary:hover {
+    background-color: rgba(13, 110, 253, 0.25) !important;
+    color: #cfe2ff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Fix secondary button */
+[data-theme="dark"] .btn-secondary {
+    background-color: rgba(108, 117, 125, 0.15) !important;
+    border-color: rgba(108, 117, 125, 0.5) !important;
+    color: #ced4da !important;
+    font-weight: 500;
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+    background-color: rgba(108, 117, 125, 0.25) !important;
+    color: #dee2e6 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Fix copy button styling */
+[data-theme="dark"] .btn-outline-secondary {
+    color: #ced4da !important;
+    border-color: rgba(108, 117, 125, 0.5) !important;
+    background-color: transparent !important;
+}
+
+[data-theme="dark"] .btn-outline-secondary:hover {
+    background-color: rgba(108, 117, 125, 0.1) !important;
+    color: #e9ecef !important;
+    transform: translateY(-1px);
+}
+
+/* Improve "no entries found" message */
+[data-theme="dark"] .text-muted {
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-style: italic;
+}
+
+/* Folders accordion styling */
+[data-theme="dark"] .accordion-item {
+    background-color: var(--card-bg, #1e1e1e) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+    margin-bottom: 0.75rem;
+    border-radius: 6px !important;
+    overflow: hidden;
+}
+
+/* Folder buttons */
+[data-theme="dark"] .accordion-button {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    color: var(--text-color, #e9ecef) !important;
+    padding: 1rem;
+    border-radius: 0 !important;
+}
+
+[data-theme="dark"] .accordion-button:not(.collapsed) {
+    background-color: rgba(74, 108, 250, 0.15) !important;
+    color: var(--text-color, #e9ecef) !important;
+    box-shadow: none !important;
+}
+
+[data-theme="dark"] .accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(74, 108, 250, 0.25) !important;
+    border-color: rgba(74, 108, 250, 0.5) !important;
+}
+
+/* Fix accordion chevron */
+[data-theme="dark"] .accordion-button::after {
+    filter: brightness(0) invert(1) !important;
+}
+
+/* Folder icon */
+[data-theme="dark"] .folder-icon {
+    color: #ffc107 !important;
+}
+
+/* Accordion body */
+[data-theme="dark"] .accordion-body {
+    background-color: var(--card-bg, #1e1e1e) !important;
+    padding: 1.25rem;
+}
+
+/* Folder dropdown menu */
+[data-theme="dark"] .dropdown-menu {
+    background-color: var(--card-bg, #1e1e1e) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+[data-theme="dark"] .dropdown-item {
+    color: var(--text-color, #e9ecef) !important;
+}
+
+[data-theme="dark"] .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .dropdown-item.text-danger {
+    color: #ea868f !important;
+}
+
+[data-theme="dark"] .dropdown-item.text-danger:hover {
+    background-color: rgba(220, 53, 69, 0.1) !important;
+}
+
+/* Modal styling */
+[data-theme="dark"] .modal-content {
+    background-color: var(--card-bg, #1e1e1e) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+    color: var(--text-color, #e9ecef) !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5) !important;
+}
+
+[data-theme="dark"] .modal-header {
+    border-bottom-color: var(--border-color, #2d2d2d) !important;
+}
+
+[data-theme="dark"] .modal-footer {
+    border-top-color: var(--border-color, #2d2d2d) !important;
+}
+
+[data-theme="dark"] .modal-title {
+    color: var(--text-color, #e9ecef) !important;
+}
+
+/* Form inputs in modals */
+[data-theme="dark"] .form-control {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-color, #e9ecef) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+}
+
+[data-theme="dark"] .form-control:focus {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 0 0 0.25rem rgba(74, 108, 250, 0.25) !important;
+}
+
+[data-theme="dark"] .form-label {
+    color: var(--text-color, #e9ecef) !important;
+}
+
+/* Fix close button in modals */
+[data-theme="dark"] .btn-close {
+    filter: brightness(0) invert(1) !important;
+}
+
+/* Animation for transition */
+.fade-transition {
+    transition: all 0.3s ease;
+}

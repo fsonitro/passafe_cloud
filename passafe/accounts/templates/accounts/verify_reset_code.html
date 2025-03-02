@@ -1,10 +1,21 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Verify Reset Code - PasSafe{% endblock %}
 
 {% block content %}
+<!-- Include the auth dark theme CSS -->
+<link rel="stylesheet" href="{% static 'accounts/css/auth_dark_theme.css' %}">
+<!-- Include the MFA-specific dark theme CSS -->
+<link rel="stylesheet" href="{% static 'accounts/css/mfa_dark_theme.css' %}">
+
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Verify Your Reset Code</h2>
+    <h2 class="text-center mb-2 verification-header">
+        <i class="fas fa-key"></i> Verify Your Reset Code
+    </h2>
+    <p class="text-center text-muted verification-instructions">
+        Enter the verification code that was sent to your email
+    </p>
 
     <!-- Display Messages -->
     {% if messages %}
@@ -18,17 +29,28 @@
     <!-- Verify Reset Code Form -->
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <form method="post" class="border p-4 bg-light rounded shadow">
+            <form method="post" class="border p-4 bg-light rounded shadow verification-form">
                 {% csrf_token %}
                 <div class="mb-3">
-                    <label for="id_reset_token" class="form-label">Reset Code:</label>
-                    <input type="text" name="reset_token" id="id_reset_token" class="form-control">
+                    <input type="text" 
+                           name="reset_token" 
+                           id="id_reset_token" 
+                           class="form-control form-control-lg"
+                           placeholder="Enter verification code"
+                           autocomplete="off"
+                           required>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary btn-block">Verify Code</button>
+                    <button type="submit" class="btn btn-primary px-4 py-2">
+                        <i class="fas fa-check-circle"></i> Verify Code
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<!-- Include the verification code enhancement script -->
+<script src="{% static 'accounts/js/verification_code.js' %}"></script>
+
 {% endblock %}

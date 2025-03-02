@@ -1,0 +1,140 @@
+/**
+ * Dark theme styles for authentication-related pages
+ * - Forgot Password
+ * - Reset Password
+ * - Verify MFA
+ * - Verify Reset Code
+ */
+
+/* Fix form background in dark mode for all auth pages */
+[data-theme="dark"] form.border.p-4.bg-light.rounded.shadow,
+[data-theme="dark"] form.border.p-4.bg-light.rounded {
+    background-color: var(--card-bg, #1e1e1e) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+    color: var(--text-color, #e9ecef) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Improve heading visibility */
+[data-theme="dark"] h2, 
+[data-theme="dark"] h3, 
+[data-theme="dark"] h4 {
+    color: var(--text-color, #e9ecef) !important;
+}
+
+/* Fix text-muted for instructions */
+[data-theme="dark"] .text-muted {
+    color: #adb5bd !important;
+}
+
+/* Fix form labels */
+[data-theme="dark"] .form-label {
+    color: var(--text-color, #e9ecef) !important;
+    font-weight: 500;
+}
+
+/* Improve form control visibility */
+[data-theme="dark"] .form-control {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-color, #e9ecef) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .form-control:focus {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(74, 108, 250, 0.5) !important;
+    box-shadow: 0 0 0 0.25rem rgba(74, 108, 250, 0.25) !important;
+}
+
+/* Fix placeholder text */
+[data-theme="dark"] .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+    opacity: 0.7;
+}
+
+/* Improve button styling */
+[data-theme="dark"] .btn-primary {
+    background-color: rgba(13, 110, 253, 0.8) !important;
+    border-color: rgba(13, 110, 253, 0.9) !important;
+    color: #ffffff !important;
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .btn-primary:hover {
+    background-color: rgba(13, 110, 253, 0.9) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Fix secondary/outline buttons */
+[data-theme="dark"] .btn-outline-secondary {
+    color: #ced4da !important;
+    border-color: rgba(108, 117, 125, 0.5) !important;
+    background-color: transparent !important;
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .btn-outline-secondary:hover {
+    background-color: rgba(108, 117, 125, 0.1) !important;
+    color: #e9ecef !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Fix alerts */
+[data-theme="dark"] .alert-info {
+    background-color: rgba(13, 202, 240, 0.15) !important;
+    border-color: rgba(13, 202, 240, 0.4) !important;
+    color: #0dcaf0 !important;
+}
+
+/* Add subtle animation to form fields */
+[data-theme="dark"] .form-control:focus {
+    animation: formGlow 2s infinite alternate;
+}
+
+@keyframes formGlow {
+    0% {
+        box-shadow: 0 0 5px rgba(74, 108, 250, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 8px rgba(74, 108, 250, 0.5);
+    }
+}
+
+/* Fix icon colors */
+[data-theme="dark"] .fas {
+    color: inherit;
+}
+
+/* Fix close button contrast */
+[data-theme="dark"] .btn-close {
+    filter: brightness(0) invert(1) !important;
+}
+
+/* Fix large form controls */
+[data-theme="dark"] .form-control-lg {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-color, #e9ecef) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+}
+
+/* Enhance container background */
+[data-theme="dark"] .container {
+    color: var(--text-color, #e9ecef);
+}
+
+/* Add transition effects */
+[data-theme="dark"] * {
+    transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Fix Link colors */
+[data-theme="dark"] a {
+    color: var(--link-color, #6c8efa);
+}
+
+[data-theme="dark"] a:hover {
+    color: var(--link-hover, #97b4ff);
+}
