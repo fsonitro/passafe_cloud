@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Welcome to PasSafe - Secure Password Management{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-content">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 animate__animated animate__fadeInLeft">
+                    <h1 class="display-4 fw-bold mb-4">Secure Your Digital Life with PasSafe</h1>
+                    <p class="lead mb-4">Store, generate, and manage your passwords with military-grade encryption. Keep your online accounts safe and accessible from anywhere.</p>
+                    <div class="hero-buttons">
+                        <a href="{% url 'accounts:register' %}" class="btn btn-primary btn-lg me-3">Get Started Free</a>
+                        <a href="{% url 'accounts:login' %}" class="btn btn-outline-primary btn-lg">Sign In</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 animate__animated animate__fadeInRight">
+                    <img src="{% static 'hub/images/hero-picture.jpg' %}" alt="Password Security" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Why Choose PasSafe?</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card h-100">
+                    <i class="fas fa-shield-alt feature-icon"></i>
+                    <h3>Military-Grade Security</h3>
+                    <p>Your passwords are protected with AES-256 bit encryption, the same standard used by governments and military organizations.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card h-100">
+                    <i class="fas fa-sync feature-icon"></i>
+                    <h3>Cross-Platform Access</h3>
+                    <p>Access your passwords securely from any device, anywhere. Your data stays synchronized and protected.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card h-100">
+                    <i class="fas fa-random feature-icon"></i>
+                    <h3>Password Generator</h3>
+                    <p>Create strong, unique passwords with our built-in generator. Never reuse weak passwords again.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta-section py-5">
+    <div class="container text-center">
+        <h2 class="mb-4">Ready to Secure Your Digital Life?</h2>
+        <p class="lead mb-4">Join thousands of users who trust PasSafe with their password security.</p>
+        <a href="{% url 'accounts:register' %}" class="btn btn-primary btn-lg">Create Your Free Account</a>
+    </div>
+</section>
+{% endblock %}

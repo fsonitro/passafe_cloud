@@ -1,12 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from password_vault.models import Folder, PasswordEntry
 from password_vault.utils import check_password_strength, find_reused_passwords, decrypt_data
 from django.contrib.auth.decorators import login_required
 from collections import Counter
 from django.contrib import messages
-from django.shortcuts import redirect
 import base64
 import datetime
+from django.views.generic import TemplateView
 
 # Helper function to retrieve the encryption key
 def get_encryption_key(request):
@@ -102,3 +102,11 @@ def homepage(request):
     }
 
     return render(request, 'hub/homepage.html', context)
+
+class HeroView(TemplateView):
+    template_name = 'hub/hero.html'
+    
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('hub:homepage')
+        return super().dispatch(request, *args, **kwargs)

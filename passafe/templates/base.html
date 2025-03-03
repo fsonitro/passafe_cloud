@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- App CSS -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'hub/css/hero.css' %}">
     <link rel="stylesheet" href="{% static 'search/css/search.css' %}">
     <link rel="stylesheet" href="{% static 'password_vault/css/view_password.css' %}">
     <link rel="icon" href="{% static 'images/passafe_fav.png' %}" type="image/x-icon">
@@ -38,7 +39,7 @@
     <!-- Modern Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand animate__animated animate__fadeIn" href="{% url 'homepage' %}">
+            <a class="navbar-brand animate__animated animate__fadeIn" href="{% url 'hub:hero' %}">
                 <img src="{% static 'images/passafe_fav.png' %}" alt="PasSafe Icon" style="height: 32px; margin-right: 10px;">
                 <span>PasSafe</span>
             </a>
@@ -111,7 +112,7 @@
                 <div class="col-lg-2 col-md-6 footer-section">
                     <h5 class="mb-4">Quick Links</h5>
                     <div class="footer-links">
-                        <a href="{% url 'homepage' %}"><i class="fas fa-chevron-right me-2"></i>Home</a>
+                        <a href="{% url 'hub:hero' %}"><i class="fas fa-chevron-right me-2"></i>Home</a>
                         <a href="{% url 'password_vault:vault_dashboard' %}"><i class="fas fa-chevron-right me-2"></i>Vault</a>
                         <a href="{% url 'accounts:account_settings' %}"><i class="fas fa-chevron-right me-2"></i>Settings</a>
                         <a href="#"><i class="fas fa-chevron-right me-2"></i>Help Center</a>

@@ -1,9 +1,4 @@
 /**
- * Password Utilities Script
- * Provides functionality to generate and manage secure passwords
- */
-
-/**
  * Generates a secure password based on selected criteria
  */
 function generatePassword() {
@@ -101,7 +96,7 @@ function initPasswordGenerator() {
         });
     }
     
-    // Add style for the generated animation and improve checkbox visibility
+    // style for the generated animation and improve checkbox visibility
     const style = document.createElement('style');
     style.textContent = `
         @keyframes highlight {

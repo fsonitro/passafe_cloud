@@ -1,7 +1,7 @@
 .copy-notification {
     position: fixed;
     top: 20px;
-    left: 50%;  /* Center horizontally */
+    left: 50%; 
     transform: translateX(-50%) translateY(-20px);  /* Center and initial position above viewport */
     padding: 10px 20px;
     border-radius: 5px;

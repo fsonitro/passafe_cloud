@@ -53,7 +53,7 @@ def set_theme(request):
 def user_logout(request):
     request.session.pop('encryption_key', None)  # Clear encryption key from session
     logout(request)
-    return redirect('homepage')
+    return redirect('hub:hero')
 
 # store_encryption_key function
 def store_encryption_key(request, password, pin, salt):
@@ -95,7 +95,7 @@ def register(request):
                 fail_silently=False,
             )
             messages.success(request, 'Registration successful! Welcome to PasSafe.')
-            return redirect('homepage')
+            return redirect('hub:homepage')
         else:
             messages.error(request, 'Please correct the errors below.')
     else:
@@ -149,7 +149,7 @@ def user_login(request):
                             # location=None  # Or set if using a geolocation lookup
                         )
 
-                        return redirect('homepage')
+                        return redirect('hub:homepage')
                 else:
                     form.add_error('pin', "Invalid PIN.")
             else:

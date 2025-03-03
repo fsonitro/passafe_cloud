@@ -1,7 +1,3 @@
-/**
- * Base JavaScript functionality for PasSafe
- * Contains theme toggle and persistent theme handling
- */
 
 document.addEventListener('DOMContentLoaded', function() {
     // Apply saved theme before page renders completely to prevent flashing
