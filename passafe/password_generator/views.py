@@ -1,48 +1,28 @@
-import random
-import string
+import json
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_protect
 from django.shortcuts import render
 
-@csrf_protect  # Enable CSRF protection for security
+@csrf_protect
 @require_POST
 def generate_password(request):
     try:
-        # Fetch password criteria from POST request
-        length = int(request.POST.get('length', 12))  # Default length is 12
-        include_uppercase = request.POST.get('include_uppercase', 'true') == 'true'
-        include_lowercase = request.POST.get('include_lowercase', 'true') == 'true'
-        include_numbers = request.POST.get('include_numbers', 'true') == 'true'
-        include_symbols = request.POST.get('include_symbols', 'false') == 'true'
+        # Get the options from the POST request
+        options = {
+            'length': int(request.POST.get('length', 12)),
+            'includeUppercase': request.POST.get('include_uppercase') == 'true',
+            'includeLowercase': request.POST.get('include_lowercase') == 'true',
+            'includeNumbers': request.POST.get('include_numbers') == 'true',
+            'includeSymbols': request.POST.get('include_symbols') == 'true'
+        }
 
-        # Character pools based on user input
-        characters = ""
-        if include_uppercase:
-            characters += string.ascii_uppercase
-        if include_lowercase:
-            characters += string.ascii_lowercase
-        if include_numbers:
-            characters += string.digits
-        if include_symbols:
-            characters += "!@#$%^&*()-_=+[]{}|;:,.<>?/~`"
-
-        # Error response if no character type selected
-        if not characters:
-            return JsonResponse({"error": "No character types selected"}, status=400)
-        
-        # Generate password from selected characters
-        password = ''.join(random.choice(characters) for _ in range(length))
-
-        # Return JSON response with generated password and length
+        # Return the options for client-side generation
         return JsonResponse({
-            "password": password,
-            "length": length
+            'success': True,
+            'options': options
         })
-    
-    except ValueError:
-        # Handle possible conversion errors for length and other parameters
-        return JsonResponse({"error": "Invalid input data"}, status=400)
+    except ValueError as e:
+        return JsonResponse({'error': 'Invalid input parameters'}, status=400)
     except Exception as e:
-        # Catch-all for any unexpected errors
-        return JsonResponse({"error": str(e)}, status=500)
+        return JsonResponse({'error': str(e)}, status=500)

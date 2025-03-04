@@ -1,61 +1,94 @@
+// Password generation configuration
+const CHARACTER_SETS = {
+    uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    lowercase: 'abcdefghijklmnopqrstuvwxyz',
+    numbers: '0123456789',
+    symbols: '!@#$%^&*()_+-=[]{}|;:,.<>?'
+};
+
+/**
+ * Generates a password based on criteria
+ * @param {Object} options Password generation options
+ * @returns {string} Generated password
+ */
+function generatePasswordWithCriteria(options = {}) {
+    const {
+        length = 12,
+        includeUppercase = true,
+        includeLowercase = true,
+        includeNumbers = true,
+        includeSymbols = false
+    } = options;
+
+    let charset = '';
+    if (includeUppercase) charset += CHARACTER_SETS.uppercase;
+    if (includeLowercase) charset += CHARACTER_SETS.lowercase;
+    if (includeNumbers) charset += CHARACTER_SETS.numbers;
+    if (includeSymbols) charset += CHARACTER_SETS.symbols;
+
+    if (!charset) {
+        throw new Error('At least one character type must be selected');
+    }
+
+    // Ensure at least one character from each selected type
+    let password = '';
+    const requirements = [];
+    if (includeUppercase) requirements.push(CHARACTER_SETS.uppercase);
+    if (includeLowercase) requirements.push(CHARACTER_SETS.lowercase);
+    if (includeNumbers) requirements.push(CHARACTER_SETS.numbers);
+    if (includeSymbols) requirements.push(CHARACTER_SETS.symbols);
+
+    // Add one character from each required set
+    requirements.forEach(req => {
+        password += req[Math.floor(Math.random() * req.length)];
+    });
+
+    // Fill the rest randomly
+    for (let i = password.length; i < length; i++) {
+        password += charset[Math.floor(Math.random() * charset.length)];
+    }
+
+    // Shuffle the password
+    return password.split('').sort(() => Math.random() - 0.5).join('');
+}
+
 /**
  * Generates a secure password based on selected criteria
  */
 function generatePassword() {
-    // Get the form values
-    const length = document.getElementById('password-length').value;
-    const includeUppercase = document.getElementById('include-uppercase').checked;
-    const includeLowercase = document.getElementById('include-lowercase').checked;
-    const includeNumbers = document.getElementById('include-numbers').checked;
-    const includeSymbols = document.getElementById('include-symbols').checked;
-    
-    // Ensure at least one character type is selected
-    if (!includeUppercase && !includeLowercase && !includeNumbers && !includeSymbols) {
-        alert('Please select at least one character type.');
-        return;
-    }
-    
-    // Character sets
-    const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const lowercase = 'abcdefghijklmnopqrstuvwxyz';
-    const numbers = '0123456789';
-    const symbols = '!@#$%^&*()_+-=[]{}|;:,.<>?';
-    
-    // Build character set based on selections
-    let charset = '';
-    if (includeUppercase) charset += uppercase;
-    if (includeLowercase) charset += lowercase;
-    if (includeNumbers) charset += numbers;
-    if (includeSymbols) charset += symbols;
-    
-    // Generate password
-    let password = '';
-    for (let i = 0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * charset.length);
-        password += charset[randomIndex];
-    }
-    
-    // Set the generated password to the input field
-    document.getElementById('generated-password').value = password;
+    try {
+        const options = {
+            length: parseInt(document.getElementById('password-length').value),
+            includeUppercase: document.getElementById('include-uppercase').checked,
+            includeLowercase: document.getElementById('include-lowercase').checked,
+            includeNumbers: document.getElementById('include-numbers').checked,
+            includeSymbols: document.getElementById('include-symbols').checked
+        };
 
-    // Add visual feedback with animation
-    const passwordField = document.getElementById('generated-password');
-    passwordField.classList.add('generated');
-    
-    // Apply different styles based on dark/light theme
-    const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
-    if (isDarkMode) {
-        passwordField.style.backgroundColor = 'rgba(74, 108, 250, 0.1)';
-        passwordField.style.color = '#9ec5fe';
-    } else {
-        passwordField.style.backgroundColor = 'rgba(13, 110, 253, 0.1)';
-        passwordField.style.color = '#0d6efd';
+        const password = generatePasswordWithCriteria(options);
+        document.getElementById('generated-password').value = password;
+
+        // Add visual feedback with animation
+        const passwordField = document.getElementById('generated-password');
+        passwordField.classList.add('generated');
+        
+        // Apply different styles based on dark/light theme
+        const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
+        if (isDarkMode) {
+            passwordField.style.backgroundColor = 'rgba(74, 108, 250, 0.1)';
+            passwordField.style.color = '#9ec5fe';
+        } else {
+            passwordField.style.backgroundColor = 'rgba(13, 110, 253, 0.1)';
+            passwordField.style.color = '#0d6efd';
+        }
+        
+        // Remove style and class after animation
+        setTimeout(() => {
+            passwordField.classList.remove('generated');
+        }, 1000);
+    } catch (error) {
+        alert(error.message);
     }
-    
-    // Remove style and class after animation
-    setTimeout(() => {
-        passwordField.classList.remove('generated');
-    }, 1000);
 }
 
 /**
@@ -146,7 +179,7 @@ function initPasswordGenerator() {
     `;
     document.head.appendChild(style);
     
-    // Ensure checkboxes are properly initialized with visual indication
+    // Ensure checkboxes are properly initialised with visual indication
     const checkboxes = document.querySelectorAll('.form-check-input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
         // Add a small animation to highlight checkboxes
@@ -193,5 +226,5 @@ function initPasswordGenerator() {
     }
 }
 
-// Initialize when DOM is loaded
+// Initialise when DOM is loaded
 document.addEventListener('DOMContentLoaded', initPasswordGenerator);
