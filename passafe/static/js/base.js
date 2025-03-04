@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Apply saved theme before page renders completely to prevent flashing
     applyPersistedTheme();
     
-    // Initialize theme toggle functionality
+    // Initialise theme toggle functionality
     initThemeToggle();
 });
 
@@ -43,7 +43,7 @@ function applyPersistedTheme() {
 }
 
 /**
- * Initializes theme toggle functionality
+ * Initialises theme toggle functionality
  */
 function initThemeToggle() {
     const themeToggle = document.getElementById('theme-toggle');

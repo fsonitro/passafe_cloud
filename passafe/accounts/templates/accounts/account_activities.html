@@ -1,13 +1,20 @@
+<!-- Extend the base template that contains the common layout -->
 {% extends "base.html" %}
 
+<!-- Set the page title -->
 {% block title %}Account Activities - PasSafe{% endblock %}
 
+<!-- Main content block -->
 {% block content %}
 <div class="container mt-5">
+    <!-- Page header -->
     <h2 class="text-center mb-4">Account Activity</h2>
 
+    <!-- Responsive table wrapper -->
     <div class="table-responsive">
+        <!-- Activity log table with striped rows -->
         <table class="table table-striped">
+            <!-- Table header with primary color background -->
             <thead class="table-primary">
                 <tr>
                     <th>Timestamp</th>
@@ -15,14 +22,17 @@
                     <th>User Agent</th>
                 </tr>
             </thead>
+            <!-- Table body with activity entries -->
             <tbody>
             {% for activity in activities %}
                 <tr>
+                    <!-- Format timestamp as YYYY-MM-DD HH:MM -->
                     <td>{{ activity.timestamp|date:"Y-m-d H:i" }}</td>
                     <td>{{ activity.ip_address }}</td>
                     <td>{{ activity.user_agent }}</td>
                 </tr>
             {% empty %}
+                <!-- Display message when no activities are found -->
                 <tr>
                     <td colspan="4" class="text-center">No recent activity found.</td>
                 </tr>
@@ -31,7 +41,7 @@
         </table>
     </div>
 
-    <!-- Back to Account Settings Link -->
+    <!-- Navigation button to return to account settings -->
     <div class="text-center mt-4">
         <a href="{% url 'accounts:account_settings' %}" class="btn btn-outline-secondary btn-lg">
             <i class="fas fa-arrow-left"></i> Back

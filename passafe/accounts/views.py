@@ -146,7 +146,6 @@ def user_login(request):
                             user=user,
                             ip_address=ip_address,
                             user_agent=user_agent,
-                            # location=None  # Or set if using a geolocation lookup
                         )
 
                         return redirect('hub:homepage')

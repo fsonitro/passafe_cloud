@@ -6,8 +6,18 @@ import base64
 import re
 from collections import Counter
 
-# Key derivation function to generate a unique encryption key from password and PIN
 def derive_key(password: str, pin: str, salt: bytes) -> bytes:
+    """
+    Derives an encryption key using Scrypt KDF from password and PIN.
+    
+    Parameters:
+        password: User's master password
+        pin: User's PIN for additional entropy
+        salt: Random bytes for key derivation
+    
+    Returns:
+        32-byte key suitable for AES-256
+    """
     combined_input = f"{password}{pin}".encode()
     kdf = Scrypt(
         salt=salt,
@@ -19,12 +29,26 @@ def derive_key(password: str, pin: str, salt: bytes) -> bytes:
     )
     return kdf.derive(combined_input)  # Return raw bytes (not base64-encoded)
 
-# Generate a random salt for each user
 def generate_salt():
+    """
+    Generates a cryptographically secure random salt.
+    
+    Returns:
+        16 bytes of random data for use as a salt
+    """
     return os.urandom(16)
 
-# Encrypt data with AES-GCM using the provided key
 def encrypt_data(key: bytes, plaintext: str) -> dict:
+    """
+    Encrypts data using AES-GCM authenticated encryption.
+    
+    Parameters:
+        key: 32-byte key derived from password
+        plaintext: The data to encrypt
+    
+    Returns:
+        Dictionary containing base64-encoded ciphertext, IV, and authentication tag
+    """
     iv = os.urandom(16)  # 16 bytes for AES-GCM
     encryptor = Cipher(
         algorithms.AES(key),
@@ -38,8 +62,20 @@ def encrypt_data(key: bytes, plaintext: str) -> dict:
         'tag': base64.urlsafe_b64encode(encryptor.tag).decode()
     }
 
-# Decrypt data with AES-GCM using the provided key and encrypted data
 def decrypt_data(key: bytes, encrypted_data: dict) -> str:
+    """
+    Decrypts data using AES-GCM authenticated encryption.
+    
+    Parameters:
+        key: 32-byte key derived from password
+        encrypted_data: Dict containing ciphertext, IV, and auth tag
+    
+    Returns:
+        Decrypted plaintext string
+    
+    Raises:
+        InvalidTag if authentication fails
+    """
     iv = base64.urlsafe_b64decode(encrypted_data['iv'])
     tag = base64.urlsafe_b64decode(encrypted_data['tag'])
     ciphertext = base64.urlsafe_b64decode(encrypted_data['ciphertext'])
@@ -51,11 +87,20 @@ def decrypt_data(key: bytes, encrypted_data: dict) -> str:
     ).decryptor()
     return (decryptor.update(ciphertext) + decryptor.finalize()).decode()
 
-# Check password strength
 def check_password_strength(password: str) -> str:
     """
-    Evaluate password strength.
-    Returns 'weak', 'moderate', or 'strong'.
+    Evaluates password strength based on length and character composition.
+    
+    Criteria:
+    - Weak: Less than 8 characters
+    - Moderate: Missing uppercase, numbers, or special characters
+    - Strong: 8+ chars with uppercase, numbers, and special characters
+    
+    Parameters:
+        password: Password string to evaluate
+    
+    Returns:
+        'weak', 'moderate', or 'strong'
     """
     if len(password) < 8:
         return 'weak'
@@ -65,11 +110,19 @@ def check_password_strength(password: str) -> str:
         return 'moderate'
     return 'strong'
 
-# Find reused passwords
 def find_reused_passwords(passwords: list) -> list:
     """
-    Identify reused passwords in a list.
-    Returns a list of passwords reused more than once.
+    Identifies passwords that are used multiple times.
+    
+    Parameters:
+        passwords: List of passwords to check
+    
+    Returns:
+        List of passwords that appear more than once
+    
+    Security Note:
+        This function should only be used with hashed passwords
+        to avoid exposing plaintext passwords in memory
     """
     password_counts = Counter(passwords)
     reused = [password for password, count in password_counts.items() if count > 1]
