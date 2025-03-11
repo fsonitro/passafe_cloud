@@ -19,6 +19,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
+from django.core.paginator import Paginator
+from datetime import datetime, timedelta
 
 from .forms import (
     AccountSettingsForm, CustomLoginForm, CustomUserCreationForm,
@@ -408,6 +410,13 @@ def disable_mfa(request):
 
 @login_required
 def export_passwords(request):
+    user = request.user
+    
+    # Check if MFA is enabled for the user
+    if not user.mfa_enabled:
+        messages.error(request, "Multi-Factor Authentication must be enabled to export passwords. Please enable MFA in your account settings.", extra_tags='account_settings')
+        return redirect('accounts:account_settings')
+    
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="passwords.csv"'
@@ -449,7 +458,62 @@ def export_passwords(request):
 @login_required
 def account_activities(request):
     user = request.user
-    activities = LoginActivity.objects.filter(user=user).order_by('-timestamp')
+    
+    # Handle date filters
+    filter_days = request.GET.get('days', None)
+    filter_date_from = request.GET.get('date_from', None)
+    filter_date_to = request.GET.get('date_to', None)
+    
+    activities = LoginActivity.objects.filter(user=user)
+    
+    # Apply filters if specified
+    if filter_days:
+        try:
+            days = int(filter_days)
+            start_date = timezone.now() - timedelta(days=days)
+            activities = activities.filter(timestamp__gte=start_date)
+        except ValueError:
+            # If invalid days value, ignore the filter
+            pass
+    elif filter_date_from and filter_date_to:
+        try:
+            # Parse dates from the form input and make them timezone aware
+            date_from = datetime.strptime(filter_date_from, '%Y-%m-%d')
+            date_to = datetime.strptime(filter_date_to, '%Y-%m-%d')
+            
+            # Convert naive datetime to timezone-aware datetime
+            date_from = timezone.make_aware(date_from, timezone.get_current_timezone())
+            # Add one day to date_to to include the entire day and make timezone-aware
+            date_to = timezone.make_aware(
+                date_to + timedelta(days=1),
+                timezone.get_current_timezone()
+            )
+            
+            activities = activities.filter(
+                timestamp__gte=date_from,
+                timestamp__lt=date_to
+            )
+        except ValueError:
+            # If invalid date format, ignore the filter
+            pass
+            
+    # Order by most recent first
+    activities = activities.order_by('-timestamp')
+    
+    # Set up pagination
+    page_number = request.GET.get('page', 1)
+    paginator = Paginator(activities, 15)  # Show 15 activities per page
+    page_obj = paginator.get_page(page_number)
+    
+    # Get the current filter parameters to pass to template for maintaining filters during pagination
+    filter_params = request.GET.copy()
+    if 'page' in filter_params:
+        del filter_params['page']  # Remove page from parameters to avoid duplicate
+    
     return render(request, 'accounts/account_activities.html', {
-        'activities': activities
+        'page_obj': page_obj,
+        'filter_days': filter_days,
+        'filter_date_from': filter_date_from,
+        'filter_date_to': filter_date_to,
+        'filter_params': filter_params.urlencode(),
     })

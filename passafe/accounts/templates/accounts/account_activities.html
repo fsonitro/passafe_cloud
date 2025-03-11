@@ -6,45 +6,158 @@
 
 <!-- Main content block -->
 {% block content %}
+{% load static %}
+<!-- Add dark theme CSS for account activities -->
+<link rel="stylesheet" href="{% static 'accounts/css/account_activities_dark.css' %}">
+
 <div class="container mt-5">
     <!-- Page header -->
-    <h2 class="text-center mb-4">Account Activity</h2>
+    <h2 class="text-center mb-4">
+        <i class="fas fa-history me-2"></i>Account Activity
+    </h2>
+
+    <!-- Filters section -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-filter me-2"></i>Filter Activities</h5>
+        </div>
+        <div class="card-body">
+            <form method="get" action="{% url 'accounts:account_activities' %}" class="row g-3">
+                <!-- Quick filters -->
+                <div class="col-md-6">
+                    <label class="form-label">Quick Filter</label>
+                    <div class="d-flex gap-2">
+                        <button type="submit" name="days" value="7" class="btn btn-outline-primary {% if filter_days == '7' %}active{% endif %}">Last 7 days</button>
+                        <button type="submit" name="days" value="30" class="btn btn-outline-primary {% if filter_days == '30' %}active{% endif %}">Last 30 days</button>
+                        <button type="submit" name="days" value="90" class="btn btn-outline-primary {% if filter_days == '90' %}active{% endif %}">Last 90 days</button>
+                    </div>
+                </div>
+                
+                <!-- Date range filter -->
+                <div class="col-md-6">
+                    <label class="form-label">Custom Date Range</label>
+                    <div class="row g-2">
+                        <div class="col">
+                            <input type="date" name="date_from" class="form-control" value="{{ filter_date_from|default:'' }}" placeholder="From">
+                        </div>
+                        <div class="col-auto">to</div>
+                        <div class="col">
+                            <input type="date" name="date_to" class="form-control" value="{{ filter_date_to|default:'' }}" placeholder="To">
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary">Apply</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Reset filters button -->
+                <div class="col-12 text-end">
+                    <a href="{% url 'accounts:account_activities' %}" class="btn btn-outline-secondary">
+                        <i class="fas fa-redo me-1"></i>Reset Filters
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Responsive table wrapper -->
-    <div class="table-responsive">
-        <!-- Activity log table with striped rows -->
-        <table class="table table-striped">
-            <!-- Table header with primary color background -->
-            <thead class="table-primary">
-                <tr>
-                    <th>Timestamp</th>
-                    <th>IP Address</th>
-                    <th>User Agent</th>
-                </tr>
-            </thead>
-            <!-- Table body with activity entries -->
-            <tbody>
-            {% for activity in activities %}
-                <tr>
-                    <!-- Format timestamp as YYYY-MM-DD HH:MM -->
-                    <td>{{ activity.timestamp|date:"Y-m-d H:i" }}</td>
-                    <td>{{ activity.ip_address }}</td>
-                    <td>{{ activity.user_agent }}</td>
-                </tr>
-            {% empty %}
-                <!-- Display message when no activities are found -->
-                <tr>
-                    <td colspan="4" class="text-center">No recent activity found.</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <!-- Activity log table with striped rows -->
+                <table class="table table-striped table-hover">
+                    <!-- Table header -->
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>IP Address</th>
+                            <th>User Agent</th>
+                        </tr>
+                    </thead>
+                    <!-- Table body with activity entries -->
+                    <tbody>
+                    {% for activity in page_obj %}
+                        <tr>
+                            <!-- Format timestamp as YYYY-MM-DD HH:MM -->
+                            <td>{{ activity.timestamp|date:"Y-m-d H:i" }}</td>
+                            <td>{{ activity.ip_address }}</td>
+                            <td>{{ activity.user_agent }}</td>
+                        </tr>
+                    {% empty %}
+                        <!-- Display message when no activities are found -->
+                        <tr>
+                            <td colspan="3" class="text-center py-4">
+                                <i class="fas fa-info-circle me-2"></i>No activities found matching your criteria.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Pagination controls -->
+            {% if page_obj.paginator.num_pages > 1 %}
+            <div class="pagination justify-content-center mt-4">
+                <nav aria-label="Activity navigation">
+                    <ul class="pagination">
+                        <!-- Previous page -->
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if filter_params %}&{{ filter_params }}{% endif %}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                        
+                        <!-- Page numbers -->
+                        {% for i in page_obj.paginator.page_range %}
+                            {% if page_obj.number == i %}
+                                <li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
+                            {% elif i > page_obj.number|add:"-3" and i < page_obj.number|add:"3" %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ i }}{% if filter_params %}&{{ filter_params }}{% endif %}">{{ i }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        <!-- Next page -->
+                        {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if filter_params %}&{{ filter_params }}{% endif %}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+            {% endif %}
+            
+            <!-- Page information -->
+            <div class="text-center text-muted mt-2">
+                Showing 
+                {{ page_obj.start_index }}-{{ page_obj.end_index }} 
+                of {{ page_obj.paginator.count }} activities
+            </div>
+        </div>
     </div>
 
     <!-- Navigation button to return to account settings -->
     <div class="text-center mt-4">
-        <a href="{% url 'accounts:account_settings' %}" class="btn btn-outline-secondary btn-lg">
-            <i class="fas fa-arrow-left"></i> Back
+        <a href="{% url 'accounts:account_settings' %}" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Back to Account Settings
         </a>
     </div>
 </div>

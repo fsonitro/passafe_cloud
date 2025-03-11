@@ -103,6 +103,11 @@ function copyToClipboard() {
             // Show confirmation message
             const copyMessage = document.getElementById("copy-message");
             copyMessage.style.display = "block";
+
+            setTimeout(() => {
+                navigator.clipboard.writeText('');  // Clear clipboard after 15 seconds
+            }, 15000);
+            
             setTimeout(() => {
                 copyMessage.style.display = "none";
             }, 2000);  // Hide message after 2 seconds

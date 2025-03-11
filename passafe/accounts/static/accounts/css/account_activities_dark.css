@@ -1,0 +1,158 @@
+/**
+ * Dark theme enhancements for account activities page
+ */
+
+/* Improve card styling in dark mode */
+[data-theme="dark"] .card {
+    background-color: var(--card-bg, #1e1e1e) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Enhance card header contrast */
+[data-theme="dark"] .card-header {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    border-bottom: 1px solid var(--border-color, #2d2d2d) !important;
+}
+
+/* Fix form filter elements */
+[data-theme="dark"] .form-control,
+[data-theme="dark"] input[type="date"] {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-color, #e9ecef) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+}
+
+[data-theme="dark"] .form-control:focus,
+[data-theme="dark"] input[type="date"]:focus {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(74, 108, 250, 0.5) !important;
+    box-shadow: 0 0 0 0.25rem rgba(74, 108, 250, 0.25) !important;
+}
+
+/* Fix filter button active state */
+[data-theme="dark"] .btn-outline-primary {
+    color: #6ea8fe !important;
+    border-color: #6ea8fe !important;
+}
+
+[data-theme="dark"] .btn-outline-primary:hover {
+    background-color: rgba(13, 110, 253, 0.15) !important;
+    color: #9ec5fe !important;
+}
+
+[data-theme="dark"] .btn-outline-primary.active {
+    background-color: rgba(13, 110, 253, 0.25) !important;
+    color: #cfe2ff !important;
+    border-color: #9ec5fe !important;
+}
+
+/* Fix labels */
+[data-theme="dark"] .form-label {
+    color: var(--text-color, #e9ecef) !important;
+    font-weight: 500 !important;
+}
+
+/* Fix the "to" text between date inputs */
+[data-theme="dark"] .col-auto {
+    color: var(--text-color, #e9ecef) !important;
+    display: flex;
+    align-items: center;
+}
+
+/* Table styling enhancements */
+[data-theme="dark"] .table {
+    color: var(--text-color, #e9ecef) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+}
+
+/* Fix table header */
+[data-theme="dark"] .table-primary,
+[data-theme="dark"] .table-primary > th,
+[data-theme="dark"] .table-primary > td {
+    background-color: rgba(74, 108, 250, 0.2) !important;
+    color: var(--text-color, #e9ecef) !important;
+    border-color: rgba(74, 108, 250, 0.1) !important;
+}
+
+/* Fix table striped rows */
+[data-theme="dark"] .table-striped > tbody > tr:nth-of-type(odd) > * {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+[data-theme="dark"] .table-hover > tbody > tr:hover > * {
+    background-color: rgba(74, 108, 250, 0.08) !important;
+}
+
+/* Pagination style improvements */
+[data-theme="dark"] .pagination .page-link {
+    background-color: var(--card-bg, #1e1e1e) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+    color: var(--text-color, #e9ecef) !important;
+}
+
+[data-theme="dark"] .pagination .page-link:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .pagination .page-item.active .page-link {
+    background-color: rgba(13, 110, 253, 0.3) !important;
+    border-color: rgba(13, 110, 253, 0.5) !important;
+    color: #cfe2ff !important;
+}
+
+[data-theme="dark"] .pagination .page-item.disabled .page-link {
+    background-color: var(--card-bg, #1e1e1e) !important;
+    border-color: var(--border-color, #2d2d2d) !important;
+    color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Fix page info text */
+[data-theme="dark"] .text-muted {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Improve the "no activities" message */
+[data-theme="dark"] .table .text-center.py-4 {
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-style: italic;
+}
+
+/* Button enhancements */
+[data-theme="dark"] .btn-primary {
+    background-color: rgba(13, 110, 253, 0.8) !important;
+    border-color: rgba(13, 110, 253, 0.9) !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .btn-outline-secondary {
+    color: #ced4da !important;
+    border-color: rgba(108, 117, 125, 0.5) !important;
+}
+
+[data-theme="dark"] .btn-outline-secondary:hover {
+    background-color: rgba(108, 117, 125, 0.1) !important;
+    color: #e9ecef !important;
+}
+
+/* Improve headings */
+[data-theme="dark"] h2, 
+[data-theme="dark"] h5 {
+    color: var(--text-color, #e9ecef) !important;
+}
+
+/* Add subtle animation to elements when hovering */
+[data-theme="dark"] .card:hover {
+    transform: translateY(-2px);
+    transition: transform 0.3s ease;
+}
+
+/* Fix date inputs which sometimes have browser-specific styling */
+[data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.8);
+}
+
+/* Add highlighted borders to filter section */
+[data-theme="dark"] .card.shadow-sm.mb-4 {
+    border-left: 3px solid rgba(13, 110, 253, 0.5) !important;
+}
