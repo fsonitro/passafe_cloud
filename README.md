@@ -135,15 +135,6 @@ passafe/
 └── passafe/           # Project settings and configuration
 ```
 
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
 ## Acknowledgements
 
 - [Django](https://www.djangoproject.com/) - The web framework used
