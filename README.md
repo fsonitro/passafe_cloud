@@ -1,6 +1,6 @@
 # PasSafe - Secure Password Manager
 
-![PasSafe Logo](passafe/static/images/logo.png)
+![PasSafe Logo](passafe/static/images/passafe_fav.png)
 
 PasSafe is a secure, open-source password manager application built with Django that helps users store, manage, and generate strong passwords with military-grade encryption.
 
@@ -135,10 +135,6 @@ passafe/
 └── passafe/           # Project settings and configuration
 ```
 
-### Running Tests
-```bash
-python manage.py test
-```
 
 ## License
 
