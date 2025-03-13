@@ -28,7 +28,7 @@ PasSafe is a secure, open-source password manager application built with Django 
 
 ## Technologies Used
 
-- **Backend**: Django 5.1+, Python 3.9+
+- **Backend**: Django 5.1+, Python 3.11+
 - **Database**: PostgreSQL
 - **Frontend**: HTML5, CSS3, JavaScript, Bootstrap 5
 - **Security**: PyOTP (for 2FA), AES-256 encryption
@@ -36,7 +36,7 @@ PasSafe is a secure, open-source password manager application built with Django 
 ## Installation
 
 ### Prerequisites
-- Python 3.9 or higher
+- Python 3.11 or higher
 - PostgreSQL
 - pip
 
