@@ -1,6 +1,6 @@
 /**
  * Verification Code Enhancement Script
- * Improves the user experience when entering verification codes
+ * Improves the user experience when entering verification codes and theme
  */
 
 document.addEventListener('DOMContentLoaded', function() {
