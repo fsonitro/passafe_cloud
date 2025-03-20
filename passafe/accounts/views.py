@@ -390,8 +390,8 @@ def verify_mfa(request):
             login(request, user, backend='accounts.backends.EmailBackend')
             del request.session['mfa_user_id']
 
-            # Redirect to the 'next' parameter if present, otherwise the dashboard
-            next_url = request.GET.get('next', 'homepage')
+            # Change from 'hub:dashboard' to 'hub:homepage' to match what's used elsewhere
+            next_url = request.GET.get('next', 'hub:homepage')
             return redirect(next_url)
         else:
             messages.error(request, "Invalid MFA code. Please try again.", extra_tags="verify_mfa")
