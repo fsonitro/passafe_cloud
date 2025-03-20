@@ -10,7 +10,7 @@ PasSafe is a secure, open-source password manager application built with Django 
 
 ### Core Functionality
 - **Secure Password Storage**: Store passwords using AES-256 bit encryption
-- **Password Generator**: Create strong, customizable passwords
+- **Password Generator**: Create strong, customisable passwords
 - **Folder Organization**: Organize passwords into folders for better management
 - **Search**: Quickly find entries across your vault
 - **Copy to Clipboard**: Easily copy usernames and passwords to clipboard
