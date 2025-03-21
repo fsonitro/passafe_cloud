@@ -85,7 +85,7 @@ PasSafe is a secure, open-source password manager application built with Django 
 
 9. **Running Tests**
    ```bash
-   python manage.py tests accounts
+   python manage.py test accounts
    ```
 10. **Make sure to configure the email notification if required**
    ```bash
