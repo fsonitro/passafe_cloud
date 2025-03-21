@@ -33,12 +33,12 @@ PasSafe is a secure, open-source password manager application built with Django 
 - **Backend**: Django 5.1+, Python 3.11+
 - **Database**: PostgreSQL
 - **Frontend**: HTML5, CSS3, JavaScript, Bootstrap 5
-- **Security**: PyOTP (for 2FA), AES-256 encryption
+- **Security**: PyOTP, qrcode (for 2FA), AES-256 encryption
 
 ## Installation
 
 ### Prerequisites
-- Python 3.11 or higher
+- Python 3.10 or higher
 - PostgreSQL
 - pip
 
@@ -82,6 +82,21 @@ PasSafe is a secure, open-source password manager application built with Django 
 
 8. **Access the application**
    - Open your browser and navigate to `http://localhost:8000`
+
+9. **Running Tests**
+   ```bash
+   python manage.py tests accounts
+   ```
+10. **Make sure to configure the email notification if required**
+   ```bash
+      EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' # Use SMTP for sending emails
+      EMAIL_HOST = '' # SMTP server (e.g., smtp.gmail.com for Gmail)
+      EMAIL_PORT = 587 # SMTP port for TLS
+      EMAIL_USE_TLS = True # Use TLS for secure connection
+      EMAIL_HOST_USER = ''  # Email address
+      EMAIL_HOST_PASSWORD = ''  # App-specific password
+      DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+   ```
 
 ## Usage
 

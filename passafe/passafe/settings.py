@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ta0lg*(+vp+8bav@%o^1gfh(d^e^$e3)mb0lb5v4vh2=+e7j*r'
+SECRET_KEY = '' # Set this to a secure random value in production
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -85,13 +85,23 @@ WSGI_APPLICATION = 'passafe.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 
-# settings.py
+# settings.py for PostgreSQL
+# Ensure you have psycopg2 installed: pip install psycopg2-binary
+# If using PostgreSQL, make sure to set up your database and user credentials
+# For SQLite, you can use the following settings instead:
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+#     }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'passafe_db',
-        'USER': 'userdb',
-        'PASSWORD': '25Kuates',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -152,12 +162,12 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',  # Default authentication backend
 ]
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'passafedonotreply@gmail.com'  # Email address
-EMAIL_HOST_PASSWORD = 'mpdy bowi kglt ntil'  # App-specific password
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' # Use SMTP for sending emails
+EMAIL_HOST = '' # SMTP server (e.g., smtp.gmail.com for Gmail)
+EMAIL_PORT = 587 # SMTP port for TLS
+EMAIL_USE_TLS = True # Use TLS for secure connection
+EMAIL_HOST_USER = ''  # Email address
+EMAIL_HOST_PASSWORD = ''  # App-specific password
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
